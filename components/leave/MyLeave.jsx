@@ -2,19 +2,20 @@ import { View, Text, FlatList } from "react-native";
 import React from "react";
 
 const LeaveCard = ({ leaveType, leaveAmount, remainingLeave, index }) => {
-    const color = {
-        0: "sky",
-        1: "green",
-        2: "pink",
-        3: "amber",
-        4: "purple",
-        5: "red",
-        6: "orange",
-        7: "purple",
+    const colorStyles = {
+        0: "bg-sky-100 border-sky-200",
+        1: "bg-green-100 border-green-200",
+        2: "bg-pink-100 border-pink-200",
+        3: "bg-amber-100 border-amber-200",
+        4: "bg-purple-100 border-purple-200",
+        5: "bg-red-100 border-red-200",
+        6: "bg-orange-100 border-orange-200",
+        7: "bg-purple-100 border-purple-200",
     };
+
     return (
         <View
-            className={`flex items-center justify-center h-20 p-1 bg-${color[index]}-100 border border-${color[index]}-200 rounded-xl w-36`}
+            className={`flex items-center justify-center h-20 p-1 ${colorStyles[index]} border rounded-xl w-36 gap-1`}
         >
             <Text className="text-gray-500">{leaveType}</Text>
             <Text className="text-2xl font-bold text-black">
