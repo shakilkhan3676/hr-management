@@ -38,10 +38,15 @@ export default function TabLayout() {
                 headerTitleAlign: "center",
                 headerStyle: {
                     backgroundColor: Colors[colorScheme ?? "light"].background,
-                    elevation: 0, // Remove shadow on Android
-                    shadowOpacity: 0, // Remove shadow on iOS
-                    borderBottomWidth: 0, // Optional: Remove border for the header
                 },
+                headerShadowVisible: false,
+
+                // headerSearchBarOptions: {
+                //     showCancelButton: true,
+                //     cancelButtonColor: Colors[colorScheme ?? "light"].text,
+                //     cancelButtonTextColor: Colors[colorScheme ?? "light"].text,
+                // },
+
                 headerLeft: () => (
                     <TouchableOpacity
                         onPress={() => router.canGoBack() && router.back()}
