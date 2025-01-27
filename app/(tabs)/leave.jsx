@@ -12,6 +12,7 @@ import MyLeave from "../../components/leave/MyLeave";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import DynamicTable from "../../components/leave/DynamicTable";
+import { router } from "expo-router";
 
 const leave = () => {
     const sampleData = [
@@ -110,7 +111,9 @@ const leave = () => {
                 <TouchableOpacity
                     activeOpacity={0.9}
                     className="bg-blue-600 w-full rounded-full py-3.5 px-5 mt-4"
-                    onPress={() => {}}
+                    onPress={() => {
+                        router.push("leave/applyLeave");
+                    }}
                 >
                     <Text className="text-lg font-semibold text-center text-white">
                         REQUEST LEAVE

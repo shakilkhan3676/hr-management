@@ -64,7 +64,7 @@ const MyLeave = () => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 // keyExtractor={(item) => item.leaveType}
-                contentContainerStyle={{ gap: 12, paddingHorizontal: 12 }}
+                contentContainerStyle={{ gap: 12, paddingHorizontal: 16 }}
             />
         </View>
     );
