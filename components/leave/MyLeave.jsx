@@ -55,16 +55,18 @@ const MyLeave = () => {
         },
     ];
     return (
-        <FlatList
-            data={totalLeave}
-            renderItem={({ item, index }) => (
-                <LeaveCard {...item} index={index} />
-            )}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.leaveType}
-            contentContainerStyle={{ gap: 12, paddingHorizontal: 12 }}
-        />
+        <View>
+            <FlatList
+                data={totalLeave}
+                renderItem={({ item, index }) => (
+                    <LeaveCard {...item} index={index} />
+                )}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                // keyExtractor={(item) => item.leaveType}
+                contentContainerStyle={{ gap: 12, paddingHorizontal: 12 }}
+            />
+        </View>
     );
 };
 
