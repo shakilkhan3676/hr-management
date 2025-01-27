@@ -43,7 +43,6 @@ const leave = () => {
             style={{
                 flex: 1,
                 marginTop: Platform.OS === "ios" ? 15 : 0,
-                // paddingBottom: Platform.OS === "ios" ? 0 : 86,
             }}
         >
             <View
@@ -97,7 +96,17 @@ const leave = () => {
             </View>
 
             {/* Bottom Buttons */}
-            <View className="absolute bottom-0 items-center w-full h-24 px-4 bg-white">
+            <View
+                className="absolute bottom-0 items-center w-full h-24 px-4 bg-white"
+                style={{
+                    shadowColor: "#2563eb", // Shadow color
+                    shadowOffset: { width: 0, height: -2 }, // Top shadow
+                    shadowOpacity: 0.1, // Shadow transparency for iOS
+                    shadowRadius: 5, // Shadow blur for iOS
+                    elevation: 10, // Higher value for Android shadow
+                    zIndex: 1, // Ensures the shadow is above other elements
+                }}
+            >
                 <TouchableOpacity
                     activeOpacity={0.9}
                     className="bg-blue-600 w-full rounded-full py-3.5 px-5 mt-4"
