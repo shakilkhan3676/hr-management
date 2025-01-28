@@ -5,7 +5,10 @@ import HomeIcon from "@/assets/icons/home.svg";
 import LeaveIcon from "@/assets/icons/time.svg";
 import ApplicationIcon from "@/assets/icons/setting.svg";
 import NotificationIcon from "@/assets/icons/notification.svg";
-import { getScreenOptions } from "@/components/navigationOptions";
+import {
+    getScreenOptions,
+    HeaderProfileOptions,
+} from "@/components/navigationOptions";
 import { HapticTab } from "@/components/HapticTab";
 import { Colors } from "@/constants/Colors";
 
@@ -45,8 +48,10 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: "Home",
-                    headerShown: false,
+                    title: "",
+                    // headerShown: false,
+                    headerTitleAlign: "left",
+                    headerLeft: () => <HeaderProfileOptions router={router} />,
                     tabBarIcon: () => <HomeIcon name="house.fill" />,
                 }}
             />

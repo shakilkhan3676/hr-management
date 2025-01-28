@@ -1,5 +1,11 @@
 // navigationOptions.js
-import { TouchableOpacity, useColorScheme, View } from "react-native";
+import {
+    Image,
+    Text,
+    TouchableOpacity,
+    useColorScheme,
+    View,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BellIcon from "@/assets/icons/bell-linear.svg";
 import { Colors } from "@/constants/Colors";
@@ -34,4 +40,25 @@ export const getScreenOptions = (router) => {
             </TouchableOpacity>
         ),
     };
+};
+
+export const HeaderProfileOptions = (router) => {
+    return (
+        <>
+            <TouchableOpacity
+                activeOpacity={0.6}
+                className="flex items-center justify-center mr-3 border border-gray-300 rounded-full w-14 h-14"
+            >
+                <Image
+                    source={require("@/assets/images/profile.jpeg")}
+                    className="w-full h-full rounded-full"
+                    style={{ objectFit: "cover" }}
+                />
+            </TouchableOpacity>
+            <View>
+                <Text className="font-semibold">710003676</Text>
+                <Text className="text-lg font-bold">Md Shakil Khan</Text>
+            </View>
+        </>
+    );
 };
