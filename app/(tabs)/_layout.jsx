@@ -48,9 +48,8 @@ export default function TabLayout() {
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: "",
-                    // headerShown: false,
-                    headerTitleAlign: "left",
+                    title: "Home",
+                    headerTitleStyle: { display: "none" },
                     headerLeft: () => <HeaderProfileOptions router={router} />,
                     tabBarIcon: () => <HomeIcon name="house.fill" />,
                 }}
