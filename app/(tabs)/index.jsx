@@ -1,12 +1,19 @@
 import { Colors } from "@/constants/Colors";
-import { Text, View, SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView, Platform, ScrollView } from "react-native";
+import ProfileCard from "@/components/home/ProfileCard";
 
 export default function Index() {
     return (
-        <SafeAreaView className={`flex-1 bg-[${Colors.light.background}]`}>
-            <Text className="p-0 m-0 font-bold text-red-400">
-                HR Management System
-            </Text>
+        <SafeAreaView
+            className={`flex-1 bg-[${Colors.light.background}]`}
+            style={{
+                flex: 1,
+                marginTop: Platform.OS === "ios" ? 12 : 0,
+            }}
+        >
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <ProfileCard />
+            </ScrollView>
         </SafeAreaView>
     );
 }
