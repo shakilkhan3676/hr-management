@@ -92,7 +92,7 @@ const ProfileCard = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 12,
+        paddingTop: 10,
         marginHorizontal: 16,
     },
     card: {
