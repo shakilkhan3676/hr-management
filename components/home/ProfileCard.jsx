@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import QRCode from "react-native-qrcode-svg";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Button } from "react-native-paper";
 
 const ProfileCard = () => {
     return (
@@ -46,19 +47,28 @@ const ProfileCard = () => {
                 </View>
 
                 <View style={styles.qrContainer}>
-                    <TouchableOpacity
-                        activeOpacity={0.8}
-                        style={styles.updateButton}
-                    >
-                        <Text style={styles.buttonText}>
+                    <Button
+                        icon={() => (
                             <MaterialCommunityIcons
                                 name="pencil-outline"
                                 size={14}
                                 color="white"
-                            />{" "}
-                            Update Profile
-                        </Text>
-                    </TouchableOpacity>
+                            />
+                        )}
+                        mode="contained"
+                        buttonColor="#8097B0"
+                        textColor="white"
+                        rippleColor="rgba(0, 0, 0, 0.1)"
+                        labelStyle={{
+                            fontSize: 11,
+                            marginVertical: 0, // Add this to remove vertical spacing
+                            paddingVertical: 4,
+                        }}
+                        onPress={() => {}}
+                    >
+                        Update Profile
+                    </Button>
+
                     <View style={styles.qrSection}>
                         <Text style={styles.virtualCardText}>
                             <MaterialCommunityIcons
@@ -78,14 +88,17 @@ const ProfileCard = () => {
                 </View>
             </View>
 
-            <TouchableOpacity
-                activeOpacity={0.7}
-                className="p-3 mt-4 bg-red-500 rounded-full"
+            <Button
+                mode="contained"
+                buttonColor="#ef4444"
+                textColor="white"
+                rippleColor="rgba(0, 0, 0, 0.1)"
+                labelStyle={{ fontSize: 16, padding: 3 }}
+                style={{ marginTop: 16, borderRadius: 50 }}
+                onPress={() => console.log("Pressed")}
             >
-                <Text className="text-lg font-semibold text-center text-white">
-                    Tap to Check Out
-                </Text>
-            </TouchableOpacity>
+                Tap to Check Out
+            </Button>
         </View>
     );
 };
