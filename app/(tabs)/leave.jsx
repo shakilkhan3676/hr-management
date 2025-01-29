@@ -14,6 +14,7 @@ import DynamicTable from "../../components/leave/DynamicTable";
 import { router } from "expo-router";
 import dayjs from "dayjs";
 import ModalDatePicker from "@/components/ModalDatePicker";
+import { Badge, Button } from "react-native-paper";
 
 const leave = () => {
     const [date, setDate] = useState(dayjs());
@@ -55,45 +56,55 @@ const leave = () => {
             {/* Leave Status */}
             {role === "manager" && (
                 <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
-                    <TouchableOpacity
-                        activeOpacity={0.8}
+                    <Button
+                        mode="contained"
+                        buttonColor={
+                            activeButton === "approval"
+                                ? "#2563eb"
+                                : "transparent"
+                        }
+                        textColor={
+                            activeButton === "approval" ? "white" : "#4b5563"
+                        }
+                        rippleColor="rgba(0, 0, 0, 0.1)"
+                        labelStyle={{
+                            fontSize: 16,
+                        }}
+                        style={{
+                            borderRadius: 50,
+                            width: "50%",
+                        }}
+                        icon={() => <Badge size={22}>10</Badge>}
+                        contentStyle={{
+                            flexDirection: "row-reverse", // This will put the badge after the text
+                        }}
                         onPress={() => setActiveButton("approval")}
-                        className={`flex-row items-center justify-center gap-1 w-1/2 py-2 rounded-full ${
-                            activeButton === "approval" && "bg-blue-600"
-                        }`}
                     >
-                        <Text
-                            className={`text-lg font-semibold text-center ${
-                                activeButton === "approval"
-                                    ? "text-white"
-                                    : "text-gray-600"
-                            }`}
-                        >
-                            Approval
-                        </Text>
-                        <View className="flex items-center justify-center h-6 px-2 bg-red-600 rounded-full">
-                            <Text className="font-semibold text-white">
-                                {1}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        activeOpacity={0.8}
+                        Approval
+                    </Button>
+
+                    <Button
+                        mode="contained"
+                        buttonColor={
+                            activeButton === "request"
+                                ? "#2563eb"
+                                : "transparent"
+                        }
+                        textColor={
+                            activeButton === "request" ? "white" : "#4b5563"
+                        }
+                        rippleColor="rgba(0, 0, 0, 0.1)"
+                        labelStyle={{
+                            fontSize: 16,
+                        }}
+                        style={{
+                            borderRadius: 50,
+                            width: "50%",
+                        }}
                         onPress={() => setActiveButton("request")}
-                        className={`flex-row items-center justify-center w-1/2 py-2 rounded-full ${
-                            activeButton === "request" && "bg-blue-600"
-                        }`}
                     >
-                        <Text
-                            className={`text-lg font-semibold text-center ${
-                                activeButton === "request"
-                                    ? "text-white"
-                                    : "text-gray-600"
-                            }`}
-                        >
-                            Request
-                        </Text>
-                    </TouchableOpacity>
+                        Request
+                    </Button>
                 </View>
             )}
 
@@ -117,6 +128,7 @@ const leave = () => {
                                 <TextInput
                                     placeholder={date.format("YYYY-MMM")} // Show selected year
                                     placeholderTextColor="#4b5563"
+                                    value={date.format("YYYY-MMM")}
                                     numberOfLines={1}
                                     editable={false}
                                     style={{
@@ -131,6 +143,7 @@ const leave = () => {
                                     color="#4b5563"
                                 />
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 activeOpacity={0.6}
                                 className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-32 flex-row items-center border border-gray-300"
@@ -176,17 +189,26 @@ const leave = () => {
                             zIndex: 1,
                         }}
                     >
-                        <TouchableOpacity
-                            activeOpacity={0.9}
-                            className="bg-blue-600 w-full rounded-full py-3.5 px-5 mt-4"
+                        <Button
+                            mode="contained"
+                            buttonColor="#2563eb"
+                            textColor="white"
+                            rippleColor="rgba(0, 0, 0, 0.1)"
+                            labelStyle={{
+                                fontSize: 16,
+                                padding: 4,
+                            }}
+                            style={{
+                                marginTop: 16,
+                                borderRadius: 50,
+                                width: "100%",
+                            }}
                             onPress={() => {
                                 router.push("leave/applyLeave");
                             }}
                         >
-                            <Text className="text-lg font-semibold text-center text-white">
-                                REQUEST LEAVE
-                            </Text>
-                        </TouchableOpacity>
+                            REQUEST LEAVE
+                        </Button>
                     </View>
                 </>
             ) : (

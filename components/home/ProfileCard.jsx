@@ -79,11 +79,13 @@ const ProfileCard = () => {
                             {"  "}
                             Virtual Card
                         </Text>
-                        <QRCode
-                            value="your-qr-code-value"
-                            size={80}
-                            backgroundColor="transparent"
-                        />
+                        <View className="p-1.5 bg-white rounded-lg">
+                            <QRCode
+                                value="your-qr-code-value"
+                                size={72}
+                                backgroundColor="transparent"
+                            />
+                        </View>
                     </View>
                 </View>
             </View>
@@ -176,6 +178,7 @@ const styles = StyleSheet.create({
     },
     qrSection: {
         alignItems: "flex-end",
+        marginTop: 12,
     },
     virtualCardText: {
         fontSize: 12,
