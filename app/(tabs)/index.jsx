@@ -1,9 +1,45 @@
+import React from "react";
 import { Colors } from "@/constants/Colors";
-import { Text, View, SafeAreaView, Platform, ScrollView } from "react-native";
+import {
+    Text,
+    View,
+    SafeAreaView,
+    Platform,
+    ScrollView,
+    Dimensions,
+} from "react-native";
 import ProfileCard from "@/components/home/ProfileCard";
+import CategoryCard from "@/components/home/CategoryCard";
 import ArrowIcon from "@/assets/icons/arrow-half-circle.svg";
+import LeaveIcon from "@/assets/icons/calendar-clock.svg";
+import EmployeeIcon from "@/assets/icons/briefcase.svg";
+import AttendanceIcon from "@/assets/icons/clock.svg";
+import PaySlipIcon from "@/assets/icons/wallet-arrow.svg";
+const { width } = Dimensions.get("window");
 
 export default function Index() {
+    const categories = [
+        {
+            id: 1,
+            name: "Leave",
+            icon: LeaveIcon,
+        },
+        {
+            id: 2,
+            name: "Employee visit",
+            icon: EmployeeIcon,
+        },
+        {
+            id: 3,
+            name: "Attendance",
+            icon: AttendanceIcon,
+        },
+        {
+            id: 4,
+            name: "Pay Slip",
+            icon: PaySlipIcon,
+        },
+    ];
     return (
         <SafeAreaView
             className={`flex-1 bg-[${Colors.light.background}]`}
@@ -36,6 +72,20 @@ export default function Index() {
                             Today's Time: 04:33hr
                         </Text>
                     </View>
+                </View>
+
+                {/* Category Section */}
+                <View className="flex-row flex-wrap gap-4 mx-4">
+                    {categories.map((category) => (
+                        <CategoryCard
+                            key={category.id}
+                            category={category}
+                            width={width}
+                            onPress={() =>
+                                console.log("Pressed", category.name)
+                            }
+                        />
+                    ))}
                 </View>
             </ScrollView>
         </SafeAreaView>
