@@ -104,7 +104,7 @@ const SelectableBottomSheet = ({
                 backdropComponent={renderBackdrop}
             >
                 <View style={styles.modalContainer}>
-                    <Text style={styles.title}>{title}</Text>
+                    {title && <Text style={styles.title}>{title}</Text>}
                     {isSearchTrue && (
                         <View style={styles.searchBtn}>
                             <TextInput

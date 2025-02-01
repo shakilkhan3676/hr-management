@@ -22,12 +22,12 @@ const leave = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [activeButton, setActiveButton] = useState("request");
     const [filterValue, setFilterValue] = useState({
-        year: dayjs().year(),
+        year: "This Year",
         type: "All",
     });
-    console.log("🚀 ~ leave ~ filterValue:", filterValue);
-    const role = "manager";
+    const [showClearFilter, setShowClearFilter] = useState(false);
 
+    const role = "manager";
     const sampleData = [
         { date: "2024-11-14", duration: 65, status: "Approved" },
         { date: "2024-11-15", duration: 70, status: "Pending" },
@@ -51,6 +51,14 @@ const leave = () => {
         { date: "2024-11-15", duration: 70, status: "Pending" },
         { date: "2024-11-16", duration: 75, status: "Approved" },
     ];
+
+    const handleClearFilter = () => {
+        setFilterValue({
+            year: "This Year",
+            type: "All",
+        });
+        setShowClearFilter(false);
+    };
 
     const types = [
         { id: 1, name: "Causal Leaves" },
@@ -142,7 +150,7 @@ const leave = () => {
                                     numberOfLines={1}
                                     style={styles.buttonText}
                                 >
-                                    {date.format("YYYY")}
+                                    {filterValue.year}
                                 </Text>
                                 <AntDesign
                                     name="calendar"
@@ -156,11 +164,11 @@ const leave = () => {
                                 defaultSelect={"Select"}
                                 title={"Leave Category"}
                                 onSelectItem={(item) => {
-                                    console.log("🚀 ~ leave ~ item:", item);
                                     setFilterValue({
                                         ...filterValue,
                                         type: item?.name,
                                     });
+                                    setShowClearFilter(true);
                                 }}
                                 isDegree={true}
                                 name={"name"}
@@ -174,7 +182,7 @@ const leave = () => {
                                         numberOfLines={1}
                                         style={styles.buttonText}
                                     >
-                                        All
+                                        {filterValue.type}
                                     </Text>
                                     <Ionicons
                                         name="chevron-down"
@@ -183,6 +191,17 @@ const leave = () => {
                                     />
                                 </TouchableOpacity>
                             </SelectableBottomSheet>
+                            {showClearFilter && (
+                                <TouchableOpacity
+                                    activeOpacity={0.6}
+                                    className=" py-2 px-3.5 w-30"
+                                    onPress={handleClearFilter}
+                                >
+                                    <Text className="font-semibold text-center text-green-800">
+                                        Clear All
+                                    </Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
                         <DynamicTable data={sampleData} />
                     </View>
@@ -192,7 +211,13 @@ const leave = () => {
                         visible={modalVisible}
                         initialDate={date}
                         onClose={() => setModalVisible(false)}
-                        onSelectDate={(selectedDate) => setDate(selectedDate)}
+                        onSelectDate={(selectedDate) => {
+                            setFilterValue({
+                                ...filterValue,
+                                year: selectedDate.format("YYYY"),
+                            });
+                            setShowClearFilter(true);
+                        }}
                     />
 
                     {/* Bottom Buttons */}
