@@ -7,10 +7,10 @@ import {
     StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
-import MyLeave from "../../components/leave/MyLeave";
+import MyLeave from "@/components/leave/MyLeave";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import DynamicTable from "../../components/leave/DynamicTable";
+import DynamicTable from "@/components/leave/DynamicTable";
 import { router } from "expo-router";
 import dayjs from "dayjs";
 import ModalDatePicker from "@/components/ModalDatePicker";
@@ -247,7 +247,7 @@ const leave = () => {
                                 width: "100%",
                             }}
                             onPress={() => {
-                                router.push("leave/applyLeave");
+                                router.push("applyLeave");
                             }}
                         >
                             REQUEST LEAVE

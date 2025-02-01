@@ -55,9 +55,10 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="leave"
+                name="(leave)"
                 options={{
                     title: "Leave",
+                    headerShown: false,
                     tabBarIcon: () => <LeaveIcon name="leave.fill" />,
                     tabBarStyle: {
                         display: "none",

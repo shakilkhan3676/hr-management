@@ -7,10 +7,11 @@ export default function LeaveLayout() {
     return (
         <Stack
             screenOptions={{
-                headerShown: true,
+                // headerShown: false,
                 ...getScreenOptions(router),
             }}
         >
+            <Stack.Screen name="index" options={{ title: "Leave" }} />
             <Stack.Screen
                 name="applyLeave"
                 options={{ title: "Apply Leave" }}
