@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const notification = () => {
+const ai = () => {
     return (
         <View>
-            <Text>notification</Text>
+            <Text>ai</Text>
         </View>
     );
 };
 
-export default notification;
+export default ai;
