@@ -4,7 +4,7 @@ import {
     SafeAreaView,
     Platform,
     TouchableOpacity,
-    TextInput,
+    StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
 import MyLeave from "../../components/leave/MyLeave";
@@ -15,11 +15,17 @@ import { router } from "expo-router";
 import dayjs from "dayjs";
 import ModalDatePicker from "@/components/ModalDatePicker";
 import { Badge, Button } from "react-native-paper";
+import SelectableBottomSheet from "@/components/SelectableBottomSheet";
 
 const leave = () => {
     const [date, setDate] = useState(dayjs());
     const [modalVisible, setModalVisible] = useState(false);
     const [activeButton, setActiveButton] = useState("request");
+    const [filterValue, setFilterValue] = useState({
+        year: dayjs().year(),
+        type: "All",
+    });
+    console.log("🚀 ~ leave ~ filterValue:", filterValue);
     const role = "manager";
 
     const sampleData = [
@@ -46,6 +52,13 @@ const leave = () => {
         { date: "2024-11-16", duration: 75, status: "Approved" },
     ];
 
+    const types = [
+        { id: 1, name: "Causal Leaves" },
+        { id: 2, name: "Duty Leaves" },
+        { id: 3, name: "Earned Leaves" },
+        { id: 4, name: "Medical/Sick Leaves" },
+        { id: 5, name: "Study Leaves" },
+    ];
     return (
         <SafeAreaView
             style={{
@@ -117,26 +130,20 @@ const leave = () => {
                     >
                         <MyLeave />
                         <View className="flex-row items-center justify-center gap-3 px-4 py-4">
-                            <Text className="text-lg font-semibold">
+                            {/* <Text className="text-lg font-semibold">
                                 Leave info.
-                            </Text>
+                            </Text> */}
                             <TouchableOpacity
                                 activeOpacity={0.6}
                                 className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-32 flex-row items-center border border-gray-300"
                                 onPress={() => setModalVisible(true)} // Open modal
                             >
-                                <TextInput
-                                    placeholder={date.format("YYYY-MMM")} // Show selected year
-                                    placeholderTextColor="#4b5563"
-                                    value={date.format("YYYY-MMM")}
+                                <Text
                                     numberOfLines={1}
-                                    editable={false}
-                                    style={{
-                                        flex: 1,
-                                        paddingRight: 5,
-                                        // fontSize: 13,
-                                    }}
-                                />
+                                    style={styles.buttonText}
+                                >
+                                    {date.format("YYYY")}
+                                </Text>
                                 <AntDesign
                                     name="calendar"
                                     size={15}
@@ -144,27 +151,38 @@ const leave = () => {
                                 />
                             </TouchableOpacity>
 
-                            <TouchableOpacity
-                                activeOpacity={0.6}
-                                className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-32 flex-row items-center border border-gray-300"
-                                onPress={() => {}}
+                            <SelectableBottomSheet
+                                dropDownDataList={types}
+                                defaultSelect={"Select"}
+                                title={"Leave Category"}
+                                onSelectItem={(item) => {
+                                    console.log("🚀 ~ leave ~ item:", item);
+                                    setFilterValue({
+                                        ...filterValue,
+                                        type: item?.name,
+                                    });
+                                }}
+                                isDegree={true}
+                                name={"name"}
                             >
-                                <TextInput
-                                    placeholder="        All"
-                                    placeholderTextColor="#4b5563"
-                                    numberOfLines={1}
-                                    editable={false}
-                                    style={{
-                                        flex: 1,
-                                        paddingRight: 10,
-                                    }}
-                                />
-                                <Ionicons
-                                    name="chevron-down"
-                                    size={17}
-                                    color="#4b5563"
-                                />
-                            </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.6}
+                                    className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-36 flex-row items-center border border-gray-300"
+                                    // onPress={handlePresentModalPress}
+                                >
+                                    <Text
+                                        numberOfLines={1}
+                                        style={styles.buttonText}
+                                    >
+                                        All
+                                    </Text>
+                                    <Ionicons
+                                        name="chevron-down"
+                                        size={17}
+                                        color="#4b5563"
+                                    />
+                                </TouchableOpacity>
+                            </SelectableBottomSheet>
                         </View>
                         <DynamicTable data={sampleData} />
                     </View>
@@ -219,3 +237,22 @@ const leave = () => {
 };
 
 export default leave;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 24,
+        justifyContent: "center",
+        backgroundColor: "grey",
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: "center",
+    },
+    buttonText: {
+        flex: 1,
+        paddingRight: 10,
+        textAlign: "center",
+        color: "#4b5563",
+    },
+});
