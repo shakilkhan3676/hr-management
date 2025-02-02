@@ -23,7 +23,7 @@ export default function Index() {
         {
             id: 1,
             name: "Leave",
-            router: "leave",
+            router: "(leave)",
             icon: LeaveIcon,
         },
         {
