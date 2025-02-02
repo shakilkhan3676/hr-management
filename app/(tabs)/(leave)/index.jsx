@@ -12,13 +12,12 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import DynamicTable from "@/components/leave/DynamicTable";
 import { router } from "expo-router";
-import dayjs from "dayjs";
-import ModalDatePicker from "@/components/ModalDatePicker";
 import { Badge, Button } from "react-native-paper";
 import SelectableBottomSheet from "@/components/SelectableBottomSheet";
+import ModalYearPicker from "@/components/ModalYearPicker";
+import dayjs from "dayjs";
 
 const leave = () => {
-    const [date, setDate] = useState(dayjs());
     const [modalVisible, setModalVisible] = useState(false);
     const [activeButton, setActiveButton] = useState("request");
     const [filterValue, setFilterValue] = useState({
@@ -206,15 +205,19 @@ const leave = () => {
                         <DynamicTable data={sampleData} />
                     </View>
 
-                    {/* ModalDatePicker */}
-                    <ModalDatePicker
+                    {/* ModalYearPicker */}
+                    <ModalYearPicker
                         visible={modalVisible}
-                        initialDate={date}
                         onClose={() => setModalVisible(false)}
-                        onSelectDate={(selectedDate) => {
+                        initialYear={
+                            filterValue.year === "This Year"
+                                ? dayjs().year()
+                                : filterValue.year
+                        }
+                        onSelectYear={(selectedYear) => {
                             setFilterValue({
                                 ...filterValue,
-                                year: selectedDate.format("YYYY"),
+                                year: selectedYear,
                             });
                             setShowClearFilter(true);
                         }}
