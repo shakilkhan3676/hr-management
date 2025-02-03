@@ -1,8 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const LeaveCard = ({ approved = false }) => {
     return (

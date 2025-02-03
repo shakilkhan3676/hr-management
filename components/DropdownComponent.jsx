@@ -1,9 +1,7 @@
 import React, { memo, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { MaterialIcons } from "@expo/vector-icons";
-import Feather from "@expo/vector-icons/Feather";
+import { MaterialIcons, Feather, AntDesign } from "@expo/vector-icons";
 
 const data = [
     {

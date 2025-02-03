@@ -8,19 +8,18 @@ import {
     ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import MyLeave from "@/components/leave/MyLeave";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import DynamicTable from "@/components/leave/DynamicTable";
 import { router } from "expo-router";
-import { Badge, Button, TouchableRipple } from "react-native-paper";
+
+import MyLeave from "@/components/leave/MyLeave";
+import DynamicTable from "@/components/leave/DynamicTable";
 import SelectableBottomSheet from "@/components/SelectableBottomSheet";
 import ModalYearPicker from "@/components/ModalYearPicker";
-import dayjs from "dayjs";
-import { Feather } from "@expo/vector-icons";
-import Entypo from "@expo/vector-icons/Entypo";
 import LeaveCard from "@/components/leave/LeaveCard";
-import DropdownComponent from "../../../components/DropdownComponent";
+import DropdownComponent from "@/components/DropdownComponent";
+
+import { Badge, Button, TouchableRipple } from "react-native-paper";
+import { Feather, Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
+import dayjs from "dayjs";
 
 const leave = () => {
     const [modalVisible, setModalVisible] = useState(false);

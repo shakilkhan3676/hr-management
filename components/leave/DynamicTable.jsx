@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import Feather from "@expo/vector-icons/Feather";
+import { Entypo, Feather } from "@expo/vector-icons";
 
 const TableHeader = React.memo(({ onSearch }) => (
     <View className="flex-row items-center justify-between px-5 py-3 bg-blue-200 h-14 gap23 rounded-tr-2xl rounded-tl-2xl">
