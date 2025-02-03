@@ -5,6 +5,7 @@ import {
     Platform,
     TouchableOpacity,
     StyleSheet,
+    ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import MyLeave from "@/components/leave/MyLeave";
@@ -12,10 +13,13 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import DynamicTable from "@/components/leave/DynamicTable";
 import { router } from "expo-router";
-import { Badge, Button } from "react-native-paper";
+import { Badge, Button, TouchableRipple } from "react-native-paper";
 import SelectableBottomSheet from "@/components/SelectableBottomSheet";
 import ModalYearPicker from "@/components/ModalYearPicker";
 import dayjs from "dayjs";
+import { Feather } from "@expo/vector-icons";
+import Entypo from "@expo/vector-icons/Entypo";
+import LeaveCard from "@/components/leave/LeaveCard";
 
 const leave = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -258,7 +262,126 @@ const leave = () => {
                     </View>
                 </>
             ) : (
-                ""
+                <>
+                    <View className={`flex-1`}>
+                        <View className="flex-row items-center justify-between gap-5 py-2 mx-4 border-b border-gray-300">
+                            <Text className="text-lg font-semibold">
+                                Approval info.
+                            </Text>
+                            <View className="flex-row items-center justify-center gap-4">
+                                <SelectableBottomSheet
+                                    dropDownDataList={types}
+                                    defaultSelect={"Select"}
+                                    title={"Leave Category"}
+                                    onSelectItem={(item) => {
+                                        setFilterValue({
+                                            ...filterValue,
+                                            type: item?.name,
+                                        });
+                                        setShowClearFilter(true);
+                                    }}
+                                    isDegree={true}
+                                    name={"name"}
+                                >
+                                    <TouchableOpacity
+                                        activeOpacity={0.6}
+                                        className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-36 flex-row items-center border border-gray-300"
+                                        // onPress={handlePresentModalPress}
+                                    >
+                                        <Text
+                                            numberOfLines={1}
+                                            style={styles.buttonText}
+                                        >
+                                            {filterValue.type}
+                                        </Text>
+                                        <Ionicons
+                                            name="chevron-down"
+                                            size={17}
+                                            color="#4b5563"
+                                        />
+                                    </TouchableOpacity>
+                                </SelectableBottomSheet>
+                                <TouchableRipple
+                                    onPress={() => console.log("Pressed 1")}
+                                    borderless={true}
+                                    style={{
+                                        borderRadius: 100,
+                                        padding: 6,
+                                    }}
+                                >
+                                    <Feather
+                                        className="text-right"
+                                        name="search"
+                                        size={24}
+                                        color="#1d4ed8"
+                                    />
+                                </TouchableRipple>
+                                <TouchableRipple
+                                    onPress={() => console.log("Pressed")}
+                                    borderless={true}
+                                    style={{
+                                        borderRadius: 100,
+                                        padding: 6,
+                                    }}
+                                >
+                                    <Entypo
+                                        name="sound-mix"
+                                        size={22}
+                                        color="#4b5563"
+                                    />
+                                </TouchableRipple>
+                            </View>
+                        </View>
+                        <ScrollView
+                            className="mx-4"
+                            showsVerticalScrollIndicator={false}
+                            contentContainerStyle={{
+                                paddingVertical: 16,
+                                gap: 16,
+                            }}
+                        >
+                            <LeaveCard />
+                            <LeaveCard />
+                            <LeaveCard approved={true} />
+                            <LeaveCard />
+                            <LeaveCard approved={true} />
+                        </ScrollView>
+                    </View>
+
+                    {/* Bottom Buttons */}
+                    {/* <View
+                        className="absolute bottom-0 items-center w-full h-24 px-4 bg-white"
+                        style={{
+                            shadowColor: "#2563eb",
+                            shadowOffset: { width: 0, height: -2 },
+                            shadowOpacity: 0.1,
+                            shadowRadius: 5,
+                            elevation: 10,
+                            zIndex: 1,
+                        }}
+                    >
+                        <Button
+                            mode="contained"
+                            buttonColor="#2563eb"
+                            textColor="white"
+                            rippleColor="rgba(0, 0, 0, 0.1)"
+                            labelStyle={{
+                                fontSize: 16,
+                                padding: 4,
+                            }}
+                            style={{
+                                marginTop: 16,
+                                borderRadius: 50,
+                                width: "100%",
+                            }}
+                            onPress={() => {
+                                router.push("applyLeave");
+                            }}
+                        >
+                            REQUEST LEAVE
+                        </Button>
+                    </View> */}
+                </>
             )}
         </SafeAreaView>
     );
