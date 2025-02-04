@@ -15,11 +15,17 @@ import DynamicTable from "@/components/leave/DynamicTable";
 import SelectableBottomSheet from "@/components/SelectableBottomSheet";
 import ModalYearPicker from "@/components/ModalYearPicker";
 import LeaveCard from "@/components/leave/LeaveCard";
-import DropdownComponent from "@/components/DropdownComponent";
 
 import { Badge, Button, TouchableRipple } from "react-native-paper";
-import { Feather, Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
+import {
+    Feather,
+    Entypo,
+    Ionicons,
+    AntDesign,
+    MaterialIcons,
+} from "@expo/vector-icons";
 import dayjs from "dayjs";
+import CustomDropdownButton from "@/components/CustomDropdownButton";
 
 const leave = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -29,6 +35,10 @@ const leave = () => {
         type: "All",
     });
     const [showClearFilter, setShowClearFilter] = useState(false);
+    const [value, setValue] = useState("3");
+    console.log("🚀 ~ leave ~ value:", value);
+    const [sortingValue, setSortingValue] = useState("");
+    console.log("🚀 ~ leave ~ sortingValue:", sortingValue);
 
     const role = "manager";
     const sampleData = [
@@ -53,6 +63,48 @@ const leave = () => {
         { date: "2024-11-14", duration: 65, status: "Approved" },
         { date: "2024-11-15", duration: 70, status: "Pending" },
         { date: "2024-11-16", duration: 75, status: "Rejected" },
+    ];
+
+    const filterData = [
+        {
+            icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
+            label: "Approved",
+            value: "1",
+        },
+        {
+            icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
+            label: "Rejected",
+            value: "2",
+        },
+        {
+            icon: <Feather name="users" size={24} color="#4b5563" />,
+            label: "All",
+            value: "3",
+        },
+    ];
+
+    const sortingData = [
+        {
+            icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
+            label: "Approved",
+            value: "1",
+        },
+        {
+            icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
+            label: "Rejected",
+            value: "2",
+        },
+        {
+            icon: (
+                <MaterialIcons
+                    name="check-box-outline-blank"
+                    size={24}
+                    color="#4b5563"
+                />
+            ),
+            label: "Select",
+            value: "3",
+        },
     ];
 
     const handleClearFilter = () => {
@@ -293,7 +345,23 @@ const leave = () => {
                                 Approval info.
                             </Text>
                             <View className="flex-row items-center justify-center gap-2">
-                                <DropdownComponent />
+                                <CustomDropdownButton
+                                    value={value}
+                                    data={filterData}
+                                    onChange={(item) => setValue(item.value)}
+                                    buttonStyle={{
+                                        backgroundColor:
+                                            value !== "3"
+                                                ? "#8097B0"
+                                                : "#E3E5E4",
+                                        borderColor:
+                                            value !== "3"
+                                                ? "#8097B0"
+                                                : "#d1d5db",
+                                        color:
+                                            value !== "3" ? "white" : "#4b5563",
+                                    }}
+                                />
                                 <TouchableRipple
                                     onPress={() => console.log("Pressed 1")}
                                     borderless={true}
@@ -305,24 +373,34 @@ const leave = () => {
                                     <Feather
                                         className="text-right text-rose-500"
                                         name="search"
-                                        size={24}
-                                        color="#1d4ed8"
+                                        size={26}
+                                        color="#09509E"
                                     />
                                 </TouchableRipple>
-                                <TouchableRipple
-                                    onPress={() => console.log("Pressed")}
-                                    borderless={true}
-                                    style={{
-                                        borderRadius: 100,
-                                        padding: 6,
+                                <CustomDropdownButton
+                                    value={sortingValue}
+                                    data={sortingData}
+                                    onChange={(item) =>
+                                        setSortingValue(item.value)
+                                    }
+                                    buttonStyle={{
+                                        width: 35,
+                                        height: 35,
+                                        paddingHorizontal: 0,
+                                        backgroundColor: "transparent",
+                                        borderWidth: 0,
                                     }}
+                                    containerWidth={135}
+                                    containerPosition={135}
                                 >
-                                    <Entypo
-                                        name="sound-mix"
-                                        size={22}
-                                        color="#4b5563"
-                                    />
-                                </TouchableRipple>
+                                    <TouchableRipple className="p-2">
+                                        <Entypo
+                                            name="sound-mix"
+                                            size={22}
+                                            color="#4b5563"
+                                        />
+                                    </TouchableRipple>
+                                </CustomDropdownButton>
                             </View>
                         </View>
 
@@ -348,22 +426,3 @@ const leave = () => {
 };
 
 export default leave;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-        justifyContent: "center",
-        backgroundColor: "grey",
-    },
-    contentContainer: {
-        flex: 1,
-        alignItems: "center",
-    },
-    buttonText: {
-        flex: 1,
-        paddingRight: 10,
-        textAlign: "center",
-        color: "#4b5563",
-    },
-});
