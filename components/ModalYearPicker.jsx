@@ -92,7 +92,7 @@ const ModalYearPicker = ({ visible, onClose, initialYear, onSelectYear }) => {
                     <View style={styles.buttonContainer}>
                         <Button
                             mode="contained"
-                            buttonColor="#2563eb"
+                            buttonColor="#09509E"
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             style={styles.button}
@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     selectedYearButton: {
-        backgroundColor: "#2563eb",
-        borderColor: "#2563eb",
+        backgroundColor: "#09509E",
+        borderColor: "#09509E",
     },
     yearText: {
         fontSize: 16,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         padding: 2,
     },
     currentYearButton: {
-        borderColor: "#2563eb",
+        borderColor: "#09509E",
         borderWidth: 1.5,
     },
 });
