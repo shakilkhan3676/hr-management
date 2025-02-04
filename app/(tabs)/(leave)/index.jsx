@@ -146,19 +146,31 @@ const leave = () => {
                             </Text> */}
                             <TouchableOpacity
                                 activeOpacity={0.6}
-                                className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-32 flex-row items-center border border-gray-300"
+                                className={`rounded-full py-2 px-3.5 min-w-32 flex-row items-center border ${
+                                    filterValue.year !== "This Year"
+                                        ? "bg-[#8097B0] border-[#8097B0]"
+                                        : "bg-[#E3E5E4] border-gray-300"
+                                }`}
                                 onPress={() => setModalVisible(true)} // Open modal
                             >
                                 <Text
                                     numberOfLines={1}
-                                    style={styles.buttonText}
+                                    className={`flex-1 pr-[10px] text-center ${
+                                        filterValue.year !== "This Year"
+                                            ? "text-white"
+                                            : "text-[#4b5563]"
+                                    }`}
                                 >
                                     {filterValue.year}
                                 </Text>
                                 <AntDesign
                                     name="calendar"
                                     size={15}
-                                    color="#4b5563"
+                                    color={
+                                        filterValue.year !== "This Year"
+                                            ? "white"
+                                            : "#4b5563"
+                                    }
                                 />
                             </TouchableOpacity>
 
@@ -178,19 +190,31 @@ const leave = () => {
                             >
                                 <TouchableOpacity
                                     activeOpacity={0.6}
-                                    className="bg-[#E3E5E4] rounded-full py-2 px-3.5 w-36 flex-row items-center border border-gray-300"
+                                    className={`rounded-full py-2 px-3.5 min-w-36 flex-row items-center border ${
+                                        filterValue.type !== "All"
+                                            ? "bg-[#8097B0] border-[#8097B0]"
+                                            : "bg-[#E3E5E4] border-gray-300 "
+                                    }`}
                                     // onPress={handlePresentModalPress}
                                 >
                                     <Text
                                         numberOfLines={1}
-                                        style={styles.buttonText}
+                                        className={`flex-1 pr-[10px] text-center ${
+                                            filterValue.type !== "All"
+                                                ? "text-white"
+                                                : "text-[#4b5563]"
+                                        }`}
                                     >
                                         {filterValue.type}
                                     </Text>
                                     <Ionicons
                                         name="chevron-down"
                                         size={17}
-                                        color="#4b5563"
+                                        color={
+                                            filterValue.type !== "All"
+                                                ? "white"
+                                                : "#4b5563"
+                                        }
                                     />
                                 </TouchableOpacity>
                             </SelectableBottomSheet>
