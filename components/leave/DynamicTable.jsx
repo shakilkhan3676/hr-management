@@ -37,7 +37,9 @@ const TableRow = React.memo(({ item, isLast, onMorePress }) => (
                     className={`px-3 py-1 rounded-full border text-center ${
                         item.status === "Approved"
                             ? "text-emerald-600 bg-emerald-100 border-emerald-200"
-                            : "text-red-600 bg-red-100 border-red-200"
+                            : item.status === "Rejected"
+                            ? "text-red-600 bg-red-100 border-red-200"
+                            : "text-amber-600 bg-amber-100 border-amber-200"
                     }`}
                 >
                     {item.status}
