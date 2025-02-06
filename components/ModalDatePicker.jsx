@@ -4,8 +4,16 @@ import { Button } from "react-native-paper";
 import DateTimePicker from "react-native-ui-datepicker";
 import dayjs from "dayjs";
 
-const ModalDatePicker = ({ visible, onClose, onSelectDate, initialDate }) => {
+const ModalDatePicker = ({
+    visible,
+    onClose,
+    onSelectDate,
+    initialDate,
+    minimumDate,
+}) => {
+    console.log("🚀 ~ initialDate:", initialDate);
     const [selectedDate, setSelectedDate] = useState(initialDate || dayjs());
+    console.log("🚀 ~ selectedDate:", selectedDate);
 
     return (
         <Modal
@@ -20,8 +28,7 @@ const ModalDatePicker = ({ visible, onClose, onSelectDate, initialDate }) => {
                         mode="single"
                         date={selectedDate}
                         displayFullDays={true}
-                        initialView="year"
-                        minimumView="year"
+                        minDate={minimumDate}
                         onChange={(params) => setSelectedDate(params.date)}
                         selectedItemColor="#2563eb"
                         dayContainerStyle={{

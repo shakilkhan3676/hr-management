@@ -78,7 +78,7 @@ const CustomDropdownButton = ({
                         <Ionicons
                             name="chevron-down"
                             size={17}
-                            color={buttonStyle.color}
+                            color={buttonStyle?.color || "#4b5563"}
                         />
                     </View>
                 )}
