@@ -21,6 +21,7 @@ const SelectableBottomSheet = ({
     onChangeSearchText,
     isSearchTrue,
     children,
+    itemContainerStyle,
 }) => {
     const bottomSheetRef = useRef(null);
 
@@ -132,6 +133,7 @@ const SelectableBottomSheet = ({
                         contentContainerStyle={[
                             styles.scrollContent,
                             { marginTop: isSearchTrue ? 0 : 20 },
+                            itemContainerStyle,
                         ]}
                         keyboardShouldPersistTaps="handled"
                     >
@@ -190,19 +192,23 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        width: "100%",
+        // width: "100%",
     },
     scrollContent: {
         flex: 1,
         paddingHorizontal: 20,
+        gap: 12,
+        // flexDirection: "row",
+        // flexWrap: "wrap",
+        // alignItems: "center",
     },
     option: {
-        marginBottom: 12,
+        // marginBottom: 12,
         padding: 8,
+        paddingHorizontal: 16,
         borderWidth: 0.5,
         borderRadius: 6,
         borderColor: "#ccc",
-        width: "100%",
         justifyContent: "center",
         flexDirection: "row",
     },

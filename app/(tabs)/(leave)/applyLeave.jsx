@@ -1,15 +1,24 @@
-import { View, Text, SafeAreaView, Platform, ScrollView } from "react-native";
+import {
+    View,
+    Text,
+    SafeAreaView,
+    Platform,
+    ScrollView,
+    TouchableOpacity,
+} from "react-native";
 import React, { useState, useCallback, useMemo } from "react";
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, TouchableRipple } from "react-native-paper";
 import ModalDatePicker from "@/components/ModalDatePicker";
+import SelectableBottomSheet from "@/components/SelectableBottomSheet";
 import dayjs from "dayjs";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 const categories = [
-    { value: "1", label: "Causal Leaves" },
-    { value: "2", label: "Duty Leaves" },
-    { value: "3", label: "Earned Leaves" },
-    { value: "4", label: "Medical/Sick Leaves" },
-    { value: "5", label: "Study Leaves" },
+    { id: 1, name: "Causal Leaves (0/1)", type: "Causal" },
+    { id: 2, name: "Duty Leaves (0/0)", type: "Duty" },
+    { id: 3, name: "Earned Leaves (06/32)", type: "Earned" },
+    { id: 4, name: "Medical/Sick Leaves (0/15)", type: "Medical/Sick" },
+    { id: 5, name: "Study Leaves (0/1)", type: "Study" },
 ];
 
 const ApplyLeave = () => {
@@ -17,8 +26,9 @@ const ApplyLeave = () => {
         startDate: dayjs(),
         endDate: dayjs(),
         reason: "",
-        category: "3", // Default category
+        category: "Select Leave Category",
     });
+    console.log("🚀 ~ ApplyLeave ~ formData:", formData);
     const [modalVisible, setModalVisible] = useState(false);
     const [activeDateField, setActiveDateField] = useState(null);
 
@@ -79,6 +89,7 @@ const ApplyLeave = () => {
                 activeOutlineColor="#4b5563"
                 style={{
                     backgroundColor: "#fff",
+                    color: "#4b5563",
                 }}
                 outlineStyle={{
                     borderRadius: 12,
@@ -108,6 +119,51 @@ const ApplyLeave = () => {
                 }}
                 showsVerticalScrollIndicator={false}
             >
+                <SelectableBottomSheet
+                    dropDownDataList={categories}
+                    defaultSelect={"Select"}
+                    title={"Leave Category"}
+                    onSelectItem={(item) => {
+                        setFormData({
+                            ...formData,
+                            category: item?.type,
+                        });
+                    }}
+                    isDegree={true}
+                    name={"name"}
+                    itemContainerStyle={{
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                    }}
+                >
+                    <TouchableRipple
+                        activeOpacity={0.6}
+                        className={`h-[50px] rounded-[12px] py-2 px-5 min-w-36 justify-center border border-gray-600 bg-white`}
+                        onPress={() => {}}
+                    >
+                        <>
+                            <View className="w-[95px] h-1 bg-white absolute -top-0.5 left-2.5"></View>
+                            <Text className="pr-[10px] text-gray-600 text-sm absolute -top-3 left-3.5">
+                                Leave Category
+                            </Text>
+                            <View className="flex-row items-center">
+                                <Text
+                                    numberOfLines={1}
+                                    className={`flex-1 pr-[10px] text-lg text-gray-600`}
+                                >
+                                    {formData.category}
+                                </Text>
+                                <FontAwesome
+                                    className="absolute top-0 right-0"
+                                    name="caret-down"
+                                    size={24}
+                                    color="#4b5563"
+                                />
+                            </View>
+                        </>
+                    </TouchableRipple>
+                </SelectableBottomSheet>
                 {renderDateInput({
                     label: "Leave Start Date",
                     fieldName: "startDate",
