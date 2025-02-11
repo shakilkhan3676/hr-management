@@ -9,17 +9,59 @@ import {
 import React, { useState, useCallback, useMemo } from "react";
 import { Button, TextInput, TouchableRipple } from "react-native-paper";
 import ModalDatePicker from "@/components/ModalDatePicker";
-import SelectableBottomSheet from "@/components/SelectableBottomSheet";
+import LeaveCategoryBottomSheet from "@/components/leave/LeaveCategoryBottomSheet";
 import dayjs from "dayjs";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import * as DocumentPicker from "expo-document-picker";
 
 const categories = [
     { id: 1, name: "Causal Leaves (0/1)", type: "Causal" },
     { id: 2, name: "Duty Leaves (0/0)", type: "Duty" },
     { id: 3, name: "Earned Leaves (06/32)", type: "Earned" },
-    { id: 4, name: "Medical/Sick Leaves (0/15)", type: "Medical/Sick" },
+    { id: 4, name: "Medical/Sick Leaves (0/15)", type: "Medical" },
     { id: 5, name: "Study Leaves (0/1)", type: "Study" },
 ];
+
+const FileUploadInput = ({ onSelectFile, fileName, setFormData }) => (
+    <View className="mt-1.5">
+        <TouchableRipple
+            onPress={onSelectFile}
+            className="h-[50px] rounded-[12px] py-2 px-3.5 justify-center border border-gray-600 bg-white min-w-36"
+        >
+            <View className="flex-row items-center gap-3">
+                <View className="w-[70px] h-1 bg-white absolute -top-4 left-0"></View>
+                <Text className="pr-[10px] text-gray-600 text-sm absolute -top-6 left-0.5">
+                    Attachment
+                </Text>
+                <MaterialIcons name="attach-file" size={24} color="black" />
+                <Text numberOfLines={1} className="text-gray-600">
+                    {fileName ? fileName : "Upload Medical Document"}
+                </Text>
+            </View>
+        </TouchableRipple>
+        {fileName && (
+            <View className="flex-row items-center justify-between p-2 rounded-lg">
+                <Text
+                    className="flex-1 text-sm text-gray-600"
+                    numberOfLines={1}
+                >
+                    {fileName}
+                </Text>
+                <TouchableOpacity
+                    activeOpacity={0.6}
+                    onPress={() => {
+                        setFormData((prev) => ({
+                            ...prev,
+                            medicalDocument: null,
+                        }));
+                    }}
+                >
+                    <Ionicons name="close-circle" size={20} color="#4b5563" />
+                </TouchableOpacity>
+            </View>
+        )}
+    </View>
+);
 
 const ApplyLeave = () => {
     const [formData, setFormData] = useState({
@@ -27,6 +69,7 @@ const ApplyLeave = () => {
         endDate: dayjs(),
         reason: "",
         category: "Select Leave Category",
+        medicalDocument: null,
     });
     console.log("🚀 ~ ApplyLeave ~ formData:", formData);
     const [modalVisible, setModalVisible] = useState(false);
@@ -71,11 +114,22 @@ const ApplyLeave = () => {
         setModalVisible(true);
     }, []);
 
-    const handleCategoryChange = useCallback((item) => {
-        setFormData((prev) => ({
-            ...prev,
-            category: item.value,
-        }));
+    const handleFilePick = useCallback(async () => {
+        try {
+            const result = await DocumentPicker.getDocumentAsync({
+                type: "application/pdf",
+            });
+
+            if (result.assets && result.assets.length > 0) {
+                const file = result.assets[0];
+                setFormData((prev) => ({
+                    ...prev,
+                    medicalDocument: file,
+                }));
+            }
+        } catch (err) {
+            console.log("Document picking error:", err);
+        }
     }, []);
 
     const renderDateInput = useCallback(
@@ -87,9 +141,9 @@ const ApplyLeave = () => {
                 value={dayjs(value).format("DD/MM/YYYY")}
                 outlineColor="#4b5563"
                 activeOutlineColor="#4b5563"
+                textColor="#4b5563"
                 style={{
                     backgroundColor: "#fff",
-                    color: "#4b5563",
                 }}
                 outlineStyle={{
                     borderRadius: 12,
@@ -97,6 +151,7 @@ const ApplyLeave = () => {
                 right={
                     <TextInput.Icon
                         icon="calendar-today"
+                        color="#4b5563"
                         size={24}
                         onPress={() => handleDatePress(fieldName)}
                     />
@@ -119,9 +174,8 @@ const ApplyLeave = () => {
                 }}
                 showsVerticalScrollIndicator={false}
             >
-                <SelectableBottomSheet
+                <LeaveCategoryBottomSheet
                     dropDownDataList={categories}
-                    defaultSelect={"Select"}
                     title={"Leave Category"}
                     onSelectItem={(item) => {
                         setFormData({
@@ -137,33 +191,24 @@ const ApplyLeave = () => {
                         alignItems: "center",
                     }}
                 >
-                    <TouchableRipple
-                        activeOpacity={0.6}
-                        className={`h-[50px] rounded-[12px] py-2 px-5 min-w-36 justify-center border border-gray-600 bg-white`}
-                        onPress={() => {}}
-                    >
-                        <>
-                            <View className="w-[95px] h-1 bg-white absolute -top-0.5 left-2.5"></View>
-                            <Text className="pr-[10px] text-gray-600 text-sm absolute -top-3 left-3.5">
+                    <TouchableRipple className="h-[50px] rounded-[12px] py-2 px-5 justify-center border border-gray-600 bg-white min-w-36">
+                        <View className="flex-row items-center justify-between">
+                            <View className="w-[94px] h-1 bg-white absolute -top-4 -left-2"></View>
+                            <Text className="pr-[10px] text-gray-600 text-sm absolute -top-6 -left-1">
                                 Leave Category
                             </Text>
-                            <View className="flex-row items-center">
-                                <Text
-                                    numberOfLines={1}
-                                    className={`flex-1 pr-[10px] text-lg text-gray-600`}
-                                >
-                                    {formData.category}
-                                </Text>
-                                <FontAwesome
-                                    className="absolute top-0 right-0"
-                                    name="caret-down"
-                                    size={24}
-                                    color="#4b5563"
-                                />
-                            </View>
-                        </>
+                            <Text className="text-lg text-gray-600">
+                                {formData.category}
+                            </Text>
+                            <FontAwesome
+                                className="absolute top-0 right-0"
+                                name="caret-down"
+                                size={24}
+                                color="#4b5563"
+                            />
+                        </View>
                     </TouchableRipple>
-                </SelectableBottomSheet>
+                </LeaveCategoryBottomSheet>
                 {renderDateInput({
                     label: "Leave Start Date",
                     fieldName: "startDate",
@@ -176,7 +221,7 @@ const ApplyLeave = () => {
                     value: formData.endDate,
                 })}
 
-                <View className="flex flex-wrap">
+                <View className="flex flex-wrap mt-1.5">
                     <Text className="px-4 py-2 font-bold text-center text-gray-600 border border-gray-600 rounded-lg">
                         Total Days: {calculateTotalDays}
                     </Text>
@@ -189,6 +234,7 @@ const ApplyLeave = () => {
                     multiline={true}
                     outlineColor="#4b5563"
                     activeOutlineColor="#4b5563"
+                    textColor="#4b5563"
                     style={{
                         backgroundColor: "#fff",
                         minHeight: 120,
@@ -204,10 +250,18 @@ const ApplyLeave = () => {
                     }
                 />
 
+                {formData.category === "Medical" && (
+                    <FileUploadInput
+                        onSelectFile={handleFilePick}
+                        fileName={formData.medicalDocument?.name}
+                        setFormData={setFormData}
+                    />
+                )}
+
                 <Button
                     mode="contained"
-                    buttonColor={"#d1d5db"}
-                    textColor={"#4b5563"}
+                    buttonColor="#2563eb"
+                    textColor="white"
                     rippleColor="rgba(0, 0, 0, 0.1)"
                     labelStyle={{
                         fontSize: 16,
@@ -217,9 +271,13 @@ const ApplyLeave = () => {
                         width: "100%",
                         marginVertical: 20,
                     }}
+                    contentStyle={{
+                        height: 45,
+                    }}
+                    uppercase
                     onPress={() => console.log("Submit:", formData)}
                 >
-                    Submit Leave Request
+                    SUBMIT
                 </Button>
             </ScrollView>
 
