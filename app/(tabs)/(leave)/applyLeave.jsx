@@ -68,10 +68,16 @@ const ApplyLeave = () => {
         startDate: dayjs(),
         endDate: dayjs(),
         reason: "",
-        category: "Select Leave Category",
+        category: null,
         medicalDocument: null,
     });
-    console.log("🚀 ~ ApplyLeave ~ formData:", formData);
+    const [errors, setErrors] = useState({
+        category: "",
+        startDate: "",
+        endDate: "",
+        reason: "",
+        medicalDocument: "",
+    });
     const [modalVisible, setModalVisible] = useState(false);
     const [activeDateField, setActiveDateField] = useState(null);
 
@@ -126,11 +132,55 @@ const ApplyLeave = () => {
                     ...prev,
                     medicalDocument: file,
                 }));
+                setErrors((prev) => ({ ...prev, medicalDocument: "" }));
             }
         } catch (err) {
             console.log("Document picking error:", err);
         }
     }, []);
+
+    const validateForm = () => {
+        let tempErrors = {};
+        let isValid = true;
+
+        // Category validation
+        if (formData.category == null) {
+            tempErrors.category = "Please select a leave category";
+            isValid = false;
+        }
+
+        // Date validation
+        if (!formData.startDate) {
+            tempErrors.startDate = "Start date is required";
+            isValid = false;
+        }
+
+        if (!formData.endDate) {
+            tempErrors.endDate = "End date is required";
+            isValid = false;
+        }
+
+        // Reason validation
+        if (!formData.reason.trim()) {
+            tempErrors.reason = "Please provide a reason for leave";
+            isValid = false;
+        }
+
+        // Medical document validation
+        if (formData.category === "Medical" && !formData.medicalDocument) {
+            tempErrors.medicalDocument = "Medical document is required";
+            isValid = false;
+        }
+
+        setErrors(tempErrors);
+        return isValid;
+    };
+
+    const handleSubmit = () => {
+        if (validateForm()) {
+            console.log("🚀 ~ handleSubmit ~ formData:", formData);
+        }
+    };
 
     const renderDateInput = useCallback(
         ({ label, fieldName, value }) => (
@@ -174,52 +224,76 @@ const ApplyLeave = () => {
                 }}
                 showsVerticalScrollIndicator={false}
             >
-                <LeaveCategoryBottomSheet
-                    dropDownDataList={categories}
-                    title={"Leave Category"}
-                    onSelectItem={(item) => {
-                        setFormData({
-                            ...formData,
-                            category: item?.type,
-                        });
-                    }}
-                    isDegree={true}
-                    name={"name"}
-                    itemContainerStyle={{
-                        flexDirection: "row",
-                        flexWrap: "wrap",
-                        alignItems: "center",
-                    }}
-                >
-                    <TouchableRipple className="h-[50px] rounded-[12px] py-2 px-5 justify-center border border-gray-600 bg-white min-w-36">
-                        <View className="flex-row items-center justify-between">
-                            <View className="w-[94px] h-1 bg-white absolute -top-4 -left-2"></View>
-                            <Text className="pr-[10px] text-gray-600 text-sm absolute -top-6 -left-1">
-                                Leave Category
-                            </Text>
-                            <Text className="text-lg text-gray-600">
-                                {formData.category}
-                            </Text>
-                            <FontAwesome
-                                className="absolute top-0 right-0"
-                                name="caret-down"
-                                size={24}
-                                color="#4b5563"
-                            />
-                        </View>
-                    </TouchableRipple>
-                </LeaveCategoryBottomSheet>
-                {renderDateInput({
-                    label: "Leave Start Date",
-                    fieldName: "startDate",
-                    value: formData.startDate,
-                })}
+                <View>
+                    <LeaveCategoryBottomSheet
+                        dropDownDataList={categories}
+                        title={"Leave Category"}
+                        onSelectItem={(item) => {
+                            setFormData({
+                                ...formData,
+                                category: item?.type,
+                            });
+                            setErrors((prev) => ({ ...prev, category: "" }));
+                        }}
+                        isDegree={true}
+                        name={"name"}
+                        itemContainerStyle={{
+                            flexDirection: "row",
+                            flexWrap: "wrap",
+                            alignItems: "center",
+                        }}
+                    >
+                        <TouchableRipple className="h-[50px] rounded-[12px] py-2 px-5 justify-center border border-gray-600 bg-white min-w-36">
+                            <View className="flex-row items-center justify-between">
+                                <View className="w-[94px] h-1 bg-white absolute -top-4 -left-2"></View>
+                                <Text className="pr-[10px] text-gray-600 text-sm absolute -top-6 -left-1">
+                                    Leave Category
+                                </Text>
+                                <Text className="text-lg text-gray-600">
+                                    {formData?.category
+                                        ? formData?.category
+                                        : "Select Leave Category"}
+                                </Text>
+                                <FontAwesome
+                                    className="absolute top-0 right-0"
+                                    name="caret-down"
+                                    size={24}
+                                    color="#4b5563"
+                                />
+                            </View>
+                        </TouchableRipple>
+                    </LeaveCategoryBottomSheet>
+                    {errors.category && (
+                        <Text className="ml-2 text-sm text-red-500">
+                            {errors.category}
+                        </Text>
+                    )}
+                </View>
+                <View>
+                    {renderDateInput({
+                        label: "Leave Start Date",
+                        fieldName: "startDate",
+                        value: formData.startDate,
+                    })}
+                    {errors.startDate && (
+                        <Text className="ml-2 text-sm text-red-500">
+                            {errors.startDate}
+                        </Text>
+                    )}
+                </View>
 
-                {renderDateInput({
-                    label: "Leave End Date",
-                    fieldName: "endDate",
-                    value: formData.endDate,
-                })}
+                <View>
+                    {renderDateInput({
+                        label: "Leave End Date",
+                        fieldName: "endDate",
+                        value: formData.endDate,
+                    })}
+                    {errors.endDate && (
+                        <Text className="ml-2 text-sm text-red-500">
+                            {errors.endDate}
+                        </Text>
+                    )}
+                </View>
 
                 <View className="flex flex-wrap mt-1.5">
                     <Text className="px-4 py-2 font-bold text-center text-gray-600 border border-gray-600 rounded-lg">
@@ -227,35 +301,50 @@ const ApplyLeave = () => {
                     </Text>
                 </View>
 
-                <TextInput
-                    mode="outlined"
-                    label="Reason"
-                    value={formData.reason}
-                    multiline={true}
-                    outlineColor="#4b5563"
-                    activeOutlineColor="#4b5563"
-                    textColor="#4b5563"
-                    style={{
-                        backgroundColor: "#fff",
-                        minHeight: 120,
-                    }}
-                    outlineStyle={{
-                        borderRadius: 12,
-                    }}
-                    onChangeText={(text) =>
-                        setFormData((prev) => ({
-                            ...prev,
-                            reason: text,
-                        }))
-                    }
-                />
+                <View>
+                    <TextInput
+                        mode="outlined"
+                        label="Reason"
+                        value={formData.reason}
+                        multiline={true}
+                        outlineColor="#4b5563"
+                        activeOutlineColor="#4b5563"
+                        textColor="#4b5563"
+                        style={{
+                            backgroundColor: "#fff",
+                            minHeight: 120,
+                        }}
+                        outlineStyle={{
+                            borderRadius: 12,
+                        }}
+                        onChangeText={(text) => {
+                            setFormData((prev) => ({
+                                ...prev,
+                                reason: text,
+                            }));
+                            setErrors((prev) => ({ ...prev, reason: "" }));
+                        }}
+                    />
+                    {errors.reason && (
+                        <Text className="ml-2 text-sm text-red-500">
+                            {errors.reason}
+                        </Text>
+                    )}
+                </View>
 
                 {formData.category === "Medical" && (
-                    <FileUploadInput
-                        onSelectFile={handleFilePick}
-                        fileName={formData.medicalDocument?.name}
-                        setFormData={setFormData}
-                    />
+                    <View>
+                        <FileUploadInput
+                            onSelectFile={handleFilePick}
+                            fileName={formData.medicalDocument?.name}
+                            setFormData={setFormData}
+                        />
+                        {errors.medicalDocument && (
+                            <Text className="ml-2 text-sm text-red-500">
+                                {errors.medicalDocument}
+                            </Text>
+                        )}
+                    </View>
                 )}
 
                 <Button
@@ -275,7 +364,7 @@ const ApplyLeave = () => {
                         height: 45,
                     }}
                     uppercase
-                    onPress={() => console.log("Submit:", formData)}
+                    onPress={handleSubmit}
                 >
                     SUBMIT
                 </Button>
