@@ -30,7 +30,7 @@ const ModalDatePicker = ({
                         displayFullDays={true}
                         minDate={minimumDate}
                         onChange={(params) => setSelectedDate(params.date)}
-                        selectedItemColor="#2563eb"
+                        selectedItemColor="#09509E"
                         dayContainerStyle={{
                             borderRadius: 10,
                             height: 40,
@@ -40,7 +40,7 @@ const ModalDatePicker = ({
                     <View style={styles.buttonContainer}>
                         <Button
                             mode="contained"
-                            buttonColor="#2563eb"
+                            buttonColor="#09509E"
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             style={styles.button}
