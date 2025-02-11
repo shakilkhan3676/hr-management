@@ -11,9 +11,7 @@ const ModalDatePicker = ({
     initialDate,
     minimumDate,
 }) => {
-    console.log("🚀 ~ initialDate:", initialDate);
     const [selectedDate, setSelectedDate] = useState(initialDate || dayjs());
-    console.log("🚀 ~ selectedDate:", selectedDate);
 
     return (
         <Modal
