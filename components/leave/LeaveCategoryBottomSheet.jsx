@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { Button } from "react-native-paper";
@@ -15,6 +15,7 @@ const LeaveCategoryBottomSheet = ({
 }) => {
     const bottomSheetRef = useRef(null);
     const [selectedButton, setSelectedButton] = useState(null);
+    const [snapPoints, setSnapPoints] = useState(["60%"]);
 
     const openBottomSheet = useCallback(() => {
         bottomSheetRef.current?.present();
@@ -32,6 +33,14 @@ const LeaveCategoryBottomSheet = ({
         handleModalClose();
         onSelectItem(selectedButton);
     };
+
+    useEffect(() => {
+        if (selectedButton?.type === "Medical") {
+            setSnapPoints(["70%"]);
+        } else {
+            setSnapPoints(["60%"]);
+        }
+    }, [selectedButton]);
 
     const renderBackdrop = useCallback(
         () => (
@@ -79,7 +88,7 @@ const LeaveCategoryBottomSheet = ({
 
             <BottomSheetModal
                 ref={bottomSheetRef}
-                snapPoints={["50%", "60%"]}
+                snapPoints={snapPoints}
                 dismissOnPanDown={false}
                 dismissOnBackdropPress={true}
                 onDismiss={handleModalClose}
@@ -89,55 +98,51 @@ const LeaveCategoryBottomSheet = ({
                     {title && <Text style={styles.title}>{title}</Text>}
 
                     <BottomSheetScrollView
-                        contentContainerStyle={[
-                            styles.scrollContent,
-                            { marginTop: 20 },
-                            itemContainerStyle,
-                        ]}
+                        contentContainerStyle={styles.scrollContent}
                         keyboardShouldPersistTaps="handled"
                     >
-                        {dropDownDataList.map(renderItem)}
-
-                        {selectedButton?.type === "Medical" && (
-                            <View className="bg-[#DDFCE0] py-3 px-5 w-full gap-1 rounded-xl">
-                                <MaterialCommunityIcons
-                                    name="alert-circle-outline"
-                                    size={24}
-                                    color="black"
-                                />
-                                <Text className="text-lg font-bold">
-                                    For Medical/Sick Leave
-                                </Text>
-                                <Text className="text-sm">
-                                    Medical Leave requires a doctor's
-                                    certificate. Please attach it before
-                                    submission to avoid delays.
-                                </Text>
-                            </View>
-                        )}
-
-                        <Button
-                            mode="contained"
-                            buttonColor="#2563eb"
-                            textColor="white"
-                            rippleColor="rgba(0, 0, 0, 0.1)"
-                            labelStyle={{
-                                fontSize: 16,
-                            }}
-                            style={{
-                                borderRadius: 100,
-                                width: "100%",
-                                marginVertical: 12,
-                            }}
-                            contentStyle={{
-                                height: 45,
-                            }}
-                            uppercase
-                            onPress={handleSubmitItem}
-                            disabled={selectedButton == null}
+                        <View
+                            style={[
+                                styles.contentContainer,
+                                { marginTop: 20 },
+                                itemContainerStyle,
+                            ]}
                         >
-                            OK
-                        </Button>
+                            {dropDownDataList.map(renderItem)}
+
+                            {selectedButton?.type === "Medical" && (
+                                <View style={styles.warningContainer}>
+                                    <MaterialCommunityIcons
+                                        name="alert-circle-outline"
+                                        size={24}
+                                        color="black"
+                                    />
+                                    <Text style={styles.warningTitle}>
+                                        For Medical/Sick Leave
+                                    </Text>
+                                    <Text style={styles.warningText}>
+                                        Medical Leave requires a doctor's
+                                        certificate. Please attach it before
+                                        submission to avoid delays.
+                                    </Text>
+                                </View>
+                            )}
+
+                            <Button
+                                mode="contained"
+                                buttonColor="#2563eb"
+                                textColor="white"
+                                rippleColor="rgba(0, 0, 0, 0.1)"
+                                labelStyle={{ fontSize: 16 }}
+                                style={styles.submitButton}
+                                contentStyle={{ height: 45 }}
+                                uppercase
+                                onPress={handleSubmitItem}
+                                disabled={selectedButton == null}
+                            >
+                                OK
+                            </Button>
+                        </View>
                     </BottomSheetScrollView>
                 </View>
             </BottomSheetModal>
@@ -146,30 +151,12 @@ const LeaveCategoryBottomSheet = ({
 };
 
 const styles = StyleSheet.create({
-    container: {
-        // paddingVertical: 10,
-    },
+    container: {},
     title: {
         fontSize: 18,
         fontWeight: "600",
         color: "#333333",
         paddingHorizontal: 20,
-    },
-    dropdownButton: {
-        paddingHorizontal: 12,
-        paddingVertical: 12,
-        borderWidth: 0.4,
-        borderRadius: 5,
-        backgroundColor: "#F1F3F7",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    dropdownText: {
-        color: "#686868",
-        fontWeight: "400",
-        fontSize: 13,
-        maxWidth: "98%",
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
@@ -177,34 +164,44 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        // width: "100%",
+        backgroundColor: "white",
     },
     scrollContent: {
+        flexGrow: 1,
+    },
+    contentContainer: {
         flex: 1,
-        marginHorizontal: 20,
+        paddingHorizontal: 20,
+        paddingBottom: 24,
         gap: 14,
+        alignItems: "center",
     },
     option: {
-        // marginBottom: 12,
-        // padding: 8,
-        // paddingHorizontal: 16,
         borderWidth: 1,
         borderRadius: 6,
         borderColor: "#ccc",
         justifyContent: "center",
         flexDirection: "row",
     },
-    optionText: {
-        color: "#333333",
-        fontSize: 16,
-        fontWeight: "400",
-    },
-    noResults: {
+    warningContainer: {
+        backgroundColor: "#DDFCE0",
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderRadius: 10,
         marginVertical: 10,
-        alignItems: "center",
     },
-    noResultsText: {
-        color: "gray",
+    warningTitle: {
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+    warningText: {
+        fontSize: 14,
+    },
+    submitButton: {
+        borderRadius: 100,
+        width: "100%",
+        marginTop: "auto",
+        marginBottom: 50,
     },
 });
 
