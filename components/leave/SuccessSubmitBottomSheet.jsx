@@ -69,13 +69,9 @@ const SuccessSubmitBottomSheet = ({ showSuccess }) => {
                             buttonColor="#2563eb"
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
-                            labelStyle={{
-                                fontSize: 16,
-                            }}
+                            labelStyle={{ fontSize: 16 }}
                             style={styles.button}
-                            contentStyle={{
-                                height: 45,
-                            }}
+                            contentStyle={{ height: 45 }}
                             onPress={handleModalClose}
                         >
                             BACK TO HOME
