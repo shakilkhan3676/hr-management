@@ -35,7 +35,7 @@ export default function Index() {
         {
             id: 3,
             name: "Attendance",
-            router: "attendance",
+            router: "/home/attendance",
             icon: AttendanceIcon,
         },
         {
