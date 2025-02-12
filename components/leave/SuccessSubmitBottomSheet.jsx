@@ -2,8 +2,9 @@ import React, { useRef, useCallback, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { Button } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import LottieView from "lottie-react-native";
+import success from "@/assets/lottie/success.json";
 
 const SuccessSubmitBottomSheet = ({ showSuccess }) => {
     const bottomSheetRef = useRef(null);
@@ -44,20 +45,24 @@ const SuccessSubmitBottomSheet = ({ showSuccess }) => {
                     {/* Success Content */}
                     <View style={styles.contentContainer}>
                         <View style={styles.iconContainer}>
-                            <MaterialIcons
-                                name="check-circle"
-                                size={80}
-                                color="#22c55e"
+                            <LottieView
+                                source={success}
+                                style={{
+                                    width: 200,
+                                    height: 200,
+                                }}
+                                autoPlay
+                                loop={true}
                             />
                         </View>
-
-                        <Text style={styles.title}>
-                            Successfully Submitted!
-                        </Text>
-                        <Text style={styles.message}>
-                            Your leave request has been submitted successfully.
-                            You will be notified once it's approved.
-                        </Text>
+                        <View style={{ marginTop: 150 }}>
+                            <Text style={styles.title}>
+                                Hooray, successfully requested time off
+                            </Text>
+                            <Text style={styles.message}>
+                                Now, just wait approval from your team lead 💪
+                            </Text>
+                        </View>
 
                         <Button
                             mode="contained"
@@ -73,7 +78,7 @@ const SuccessSubmitBottomSheet = ({ showSuccess }) => {
                             }}
                             onPress={handleModalClose}
                         >
-                            GO TO HOME
+                            BACK TO HOME
                         </Button>
                     </View>
                 </BottomSheetScrollView>
@@ -96,20 +101,23 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        padding: 24,
+        paddingHorizontal: 24,
+        paddingBottom: 24,
         alignItems: "center",
     },
     iconContainer: {
-        marginVertical: 20,
+        position: "absolute",
+        top: -20,
     },
     title: {
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: "600",
         color: "#111827",
         marginBottom: 12,
+        textAlign: "center",
     },
     message: {
-        fontSize: 16,
+        fontSize: 14,
         color: "#6b7280",
         textAlign: "center",
         marginBottom: 32,
