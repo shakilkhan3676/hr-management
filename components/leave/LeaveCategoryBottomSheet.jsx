@@ -89,8 +89,6 @@ const LeaveCategoryBottomSheet = ({
             <BottomSheetModal
                 ref={bottomSheetRef}
                 snapPoints={snapPoints}
-                dismissOnPanDown={false}
-                dismissOnBackdropPress={true}
                 onDismiss={handleModalClose}
                 backdropComponent={renderBackdrop}
             >
