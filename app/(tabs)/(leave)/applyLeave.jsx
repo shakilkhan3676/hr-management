@@ -13,6 +13,7 @@ import LeaveCategoryBottomSheet from "@/components/leave/LeaveCategoryBottomShee
 import dayjs from "dayjs";
 import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
+import SuccessSubmitBottomSheet from "@/components/leave/SuccessSubmitBottomSheet";
 
 const categories = [
     { id: 1, name: "Causal Leaves (0/1)", type: "Causal" },
@@ -80,6 +81,7 @@ const ApplyLeave = () => {
     });
     const [modalVisible, setModalVisible] = useState(false);
     const [activeDateField, setActiveDateField] = useState(null);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     // Calculate total days between dates
     const calculateTotalDays = useMemo(() => {
@@ -179,6 +181,7 @@ const ApplyLeave = () => {
     const handleSubmit = () => {
         if (validateForm()) {
             console.log("🚀 ~ handleSubmit ~ formData:", formData);
+            setShowSuccess(true);
         }
     };
 
@@ -381,6 +384,7 @@ const ApplyLeave = () => {
                         : undefined
                 }
             />
+            <SuccessSubmitBottomSheet showSuccess={showSuccess} />
         </SafeAreaView>
     );
 };
