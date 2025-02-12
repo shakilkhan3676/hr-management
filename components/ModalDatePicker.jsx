@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import {
-    View,
-    Text,
-    Modal,
-    StyleSheet,
-    TouchableOpacity,
-    Platform,
-} from "react-native";
+import { View, Modal, StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
 import DateTimePicker from "react-native-ui-datepicker";
 import dayjs from "dayjs";
 
-const ModalDatePicker = ({ visible, onClose, onSelectDate, initialDate }) => {
+const ModalDatePicker = ({
+    visible,
+    onClose,
+    onSelectDate,
+    initialDate,
+    minimumDate,
+}) => {
     const [selectedDate, setSelectedDate] = useState(initialDate || dayjs());
 
     return (
@@ -26,8 +26,9 @@ const ModalDatePicker = ({ visible, onClose, onSelectDate, initialDate }) => {
                         mode="single"
                         date={selectedDate}
                         displayFullDays={true}
+                        minDate={minimumDate}
                         onChange={(params) => setSelectedDate(params.date)}
-                        selectedItemColor="#2563eb"
+                        selectedItemColor="#09509E"
                         dayContainerStyle={{
                             borderRadius: 10,
                             height: 40,
@@ -35,23 +36,31 @@ const ModalDatePicker = ({ visible, onClose, onSelectDate, initialDate }) => {
                         }}
                     />
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            style={styles.selectButton}
+                        <Button
+                            mode="contained"
+                            buttonColor="#09509E"
+                            textColor="white"
+                            rippleColor="rgba(0, 0, 0, 0.1)"
+                            style={styles.button}
+                            labelStyle={styles.buttonLabel}
                             onPress={() => {
                                 onSelectDate(selectedDate);
                                 onClose();
                             }}
                         >
-                            <Text style={styles.selectButtonText}>Select</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            style={styles.closeButton}
+                            Select
+                        </Button>
+                        <Button
+                            mode="contained"
+                            buttonColor="#e5e7eb"
+                            textColor="#111827"
+                            rippleColor="rgba(0, 0, 0, 0.1)"
+                            style={styles.button}
+                            labelStyle={styles.buttonLabel}
                             onPress={onClose}
                         >
-                            <Text style={styles.closeButtonText}>Close</Text>
-                        </TouchableOpacity>
+                            Close
+                        </Button>
                     </View>
                 </View>
             </View>
@@ -62,7 +71,7 @@ const ModalDatePicker = ({ visible, onClose, onSelectDate, initialDate }) => {
 const styles = StyleSheet.create({
     modalBackground: {
         flex: 1,
-        backgroundColor: "rgba(0, 0, 0, 0.5)", // Blurry background
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         justifyContent: "center",
         alignItems: "center",
     },
@@ -76,29 +85,16 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: "row",
         marginTop: 20,
-        justifyContent: "space-between",
+        gap: 10,
     },
-    selectButton: {
-        backgroundColor: "#2563eb",
+    button: {
         borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginHorizontal: 5,
+        flex: 1,
     },
-    selectButtonText: {
-        color: "white",
+    buttonLabel: {
+        fontSize: 14,
         fontWeight: "bold",
-    },
-    closeButton: {
-        backgroundColor: "#e5e7eb",
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginHorizontal: 5,
-    },
-    closeButtonText: {
-        color: "#111827",
-        fontWeight: "bold",
+        padding: 2,
     },
 });
 

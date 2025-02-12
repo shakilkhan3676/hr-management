@@ -1589,6 +1589,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gorhom/bottom-sheet@npm:^5.0.6":
+  version: 5.1.1
+  resolution: "@gorhom/bottom-sheet@npm:5.1.1"
+  dependencies:
+    "@gorhom/portal": "npm:1.0.14"
+    invariant: "npm:^2.2.4"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-native": "*"
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">=2.16.1"
+    react-native-reanimated: ">=3.16.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-native":
+      optional: true
+  checksum: 10c0/efd66ae6414a2c28cf5725fb4b1f4ae2de9c2ebb7b034252b5c73d3f1944b32ec6125946b56db0d19dab6a9ecb21a6ee2f7d19437381a09302851e0739db6686
+  languageName: node
+  linkType: hard
+
+"@gorhom/portal@npm:1.0.14":
+  version: 1.0.14
+  resolution: "@gorhom/portal@npm:1.0.14"
+  dependencies:
+    nanoid: "npm:^3.3.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/86f33afc2ac2656a86a6f3fd1e41565419839576ede2c38333434a93a0a2fe4fb6fc18ab3360579427f2a1fc3b4564b933cc5ae1793a7e2825c93860a00b215f
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -4946,6 +4980,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-document-picker@npm:~13.0.3":
+  version: 13.0.3
+  resolution: "expo-document-picker@npm:13.0.3"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/333f8b6fe1a8bac0a19c660417c7878093739acdad308f78c370e4977e252b372d0671d35de478eaf2c071e0578d63a8c3bd97325ea2e505b9c22c6e1a39404b
+  languageName: node
+  linkType: hard
+
 "expo-file-system@npm:~18.0.7":
   version: 18.0.7
   resolution: "expo-file-system@npm:18.0.7"
@@ -5802,6 +5845,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@gorhom/bottom-sheet": "npm:^5.0.6"
     "@react-navigation/bottom-tabs": "npm:^7.2.0"
     "@react-navigation/native": "npm:^7.0.14"
     "@types/jest": "npm:^29.5.12"
@@ -5811,6 +5855,7 @@ __metadata:
     expo: "npm:~52.0.27"
     expo-blur: "npm:~14.0.2"
     expo-constants: "npm:~17.0.4"
+    expo-document-picker: "npm:~13.0.3"
     expo-font: "npm:~13.0.3"
     expo-haptics: "npm:~14.0.1"
     expo-linear-gradient: "npm:~14.0.2"
@@ -5835,7 +5880,7 @@ __metadata:
     react-native-screens: "npm:~4.4.0"
     react-native-svg: "npm:^15.11.1"
     react-native-svg-transformer: "npm:^1.5.0"
-    react-native-ui-datepicker: "npm:^2.0.4"
+    react-native-ui-datepicker: "npm:^2.0.11"
     react-native-web: "npm:~0.19.13"
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
@@ -7978,7 +8023,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:3.3.8, nanoid@npm:^3.3.7":
+"nanoid@npm:3.3.8, nanoid@npm:^3.3.1, nanoid@npm:^3.3.7":
   version: 3.3.8
   resolution: "nanoid@npm:3.3.8"
   bin:
@@ -9147,17 +9192,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-ui-datepicker@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "react-native-ui-datepicker@npm:2.0.4"
+"react-native-ui-datepicker@npm:^2.0.11":
+  version: 2.0.11
+  resolution: "react-native-ui-datepicker@npm:2.0.11"
   dependencies:
     dayjs: "npm:^1.11.13"
     lodash: "npm:^4.17.21"
-    react-native-wheely: "npm:^0.6.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/319c1435407d2910135ef070988e4c4024f43354bd7fd2087d3be6e88d9f8a3e7e2f959e6b737869c7e049de391ed83d284e8f0db90b114a49064b03c3bbc184
+    react-native-web: "*"
+  checksum: 10c0/ff935ac8e017b4119ef13a6c0844f281bb8cc78fef9ce5907ef2bc6db6a2082b871c60adb6f5f53bdde261543dc6b6990cf958230c340a3a4a807135a0b49f26
   languageName: node
   linkType: hard
 
@@ -9190,13 +9235,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/c738e622fa29837e0715e0632c8b8dafd3086bcef115353b0fab23d94169a789cefa7f7980206278612927f2fe236488eebf34795a6aa49a812a179e36c85d2c
-  languageName: node
-  linkType: hard
-
-"react-native-wheely@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "react-native-wheely@npm:0.6.0"
-  checksum: 10c0/397d1742feffe03951fb9a66ad4e8dbe85432cfe1686dbefdfe9ff8d86aadc979cef69c3eba75dc429a78925e80890bd0e0d071903ebf26880e3d91cfebddc3b
   languageName: node
   linkType: hard
 

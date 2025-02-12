@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import Feather from "@expo/vector-icons/Feather";
+import { Entypo, Feather } from "@expo/vector-icons";
 
 const TableHeader = React.memo(({ onSearch }) => (
     <View className="flex-row items-center justify-between px-5 py-3 bg-blue-200 h-14 gap23 rounded-tr-2xl rounded-tl-2xl">
@@ -38,7 +37,9 @@ const TableRow = React.memo(({ item, isLast, onMorePress }) => (
                     className={`px-3 py-1 rounded-full border text-center ${
                         item.status === "Approved"
                             ? "text-emerald-600 bg-emerald-100 border-emerald-200"
-                            : "text-red-600 bg-red-100 border-red-200"
+                            : item.status === "Rejected"
+                            ? "text-red-600 bg-red-100 border-red-200"
+                            : "text-amber-600 bg-amber-100 border-amber-200"
                     }`}
                 >
                     {item.status}

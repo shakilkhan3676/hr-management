@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const applyLeave = () => {
+const ai = () => {
     return (
         <View>
-            <Text>applyLeave</Text>
+            <Text>ai</Text>
         </View>
     );
 };
 
-export default applyLeave;
+export default ai;

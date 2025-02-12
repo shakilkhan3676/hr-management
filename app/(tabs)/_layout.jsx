@@ -4,7 +4,7 @@ import { Platform, useColorScheme, View } from "react-native";
 import HomeIcon from "@/assets/icons/home.svg";
 import LeaveIcon from "@/assets/icons/time.svg";
 import ApplicationIcon from "@/assets/icons/setting.svg";
-import NotificationIcon from "@/assets/icons/notification.svg";
+import AIicon from "@/assets/icons/ai.svg";
 import {
     getScreenOptions,
     HeaderProfileOptions,
@@ -55,9 +55,10 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="leave"
+                name="(leave)"
                 options={{
                     title: "Leave",
+                    headerShown: false,
                     tabBarIcon: () => <LeaveIcon name="leave.fill" />,
                     tabBarStyle: {
                         display: "none",
@@ -77,12 +78,10 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="notification"
+                name="ai"
                 options={{
-                    title: "Notification",
-                    tabBarIcon: () => (
-                        <NotificationIcon name="notification.fill" />
-                    ),
+                    title: "Daffodil AI",
+                    tabBarIcon: () => <AIicon name="ai.fill" />,
                     tabBarStyle: {
                         display: "none",
                     },

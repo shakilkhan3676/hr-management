@@ -15,6 +15,7 @@ import LeaveIcon from "@/assets/icons/calendar-clock.svg";
 import EmployeeIcon from "@/assets/icons/briefcase.svg";
 import AttendanceIcon from "@/assets/icons/clock.svg";
 import PaySlipIcon from "@/assets/icons/wallet-arrow.svg";
+import { router } from "expo-router";
 const { width } = Dimensions.get("window");
 
 export default function Index() {
@@ -22,21 +23,25 @@ export default function Index() {
         {
             id: 1,
             name: "Leave",
+            router: "(leave)",
             icon: LeaveIcon,
         },
         {
             id: 2,
             name: "Employee visit",
+            router: "employeeVisit",
             icon: EmployeeIcon,
         },
         {
             id: 3,
             name: "Attendance",
+            router: "attendance",
             icon: AttendanceIcon,
         },
         {
             id: 4,
             name: "Pay Slip",
+            router: "paySlip",
             icon: PaySlipIcon,
         },
     ];
@@ -81,9 +86,10 @@ export default function Index() {
                             key={category.id}
                             category={category}
                             width={width}
-                            onPress={() =>
-                                console.log("Pressed", category.name)
-                            }
+                            onPress={() => {
+                                console.log("Pressed", category.name);
+                                router.push(category.router);
+                            }}
                         />
                     ))}
                 </View>
