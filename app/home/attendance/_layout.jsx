@@ -4,6 +4,15 @@ import { getScreenOptions } from "@/components/navigationOptions";
 export default function AttendanceLayout() {
   const router = useRouter();
 
+  const screens = [
+    { name: "index", title: "Attendance" },
+    { name: "punchLogs", title: "Punch Logs" },
+    { name: "timeTracking", title: "Time Tracking" },
+    { name: "Schedule", title: "Schedule" },
+    { name: "absentList", title: "Absent List" },
+    { name: "manualAttendance", title: "Manual Attendance" },
+  ];
+
   return (
     <Stack
       screenOptions={{
@@ -11,21 +20,13 @@ export default function AttendanceLayout() {
         ...getScreenOptions(router),
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Attendance" }} />
-      <Stack.Screen
-        name="punchLogs"
-        options={{ title: "Punch Logs" }}
-      />
-      <Stack.Screen name="timeTracking" options={{ title: "Time Tracking" }} />
-      <Stack.Screen name="Schedule" options={{ title: "Schedule" }} />
-      <Stack.Screen
-        name="absentList"
-        options={{ title: "Absent List" }}
-      />
-       <Stack.Screen
-        name="manualAttendance"
-        options={{ title: "Manual Attendance" }}
-      />
+      {screens.map((screen) => (
+        <Stack.Screen
+          key={screen.name}
+          name={screen.name}
+          options={{ title: screen.title }}
+        />
+      ))}
     </Stack>
   );
 }
