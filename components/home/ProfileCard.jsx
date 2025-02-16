@@ -1,13 +1,17 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import QRCode from "react-native-qrcode-svg";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Button } from "react-native-paper";
+import { router } from "expo-router";
 
 const ProfileCard = () => {
     return (
-        <View style={styles.container}>
+        <Pressable
+            style={styles.container}
+            onPress={() => router.push("profile")}
+        >
             <View style={styles.card}>
                 {/* Base white overlay gradient */}
                 <LinearGradient
@@ -101,7 +105,7 @@ const ProfileCard = () => {
             >
                 Tap to Check Out
             </Button>
-        </View>
+        </Pressable>
     );
 };
 

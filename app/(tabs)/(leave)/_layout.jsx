@@ -7,7 +7,6 @@ export default function LeaveLayout() {
     return (
         <Stack
             screenOptions={{
-                // headerShown: false,
                 ...getScreenOptions(router),
             }}
         >

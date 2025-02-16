@@ -1,6 +1,6 @@
 import { Tabs, useRouter } from "expo-router";
 import React from "react";
-import { Platform, useColorScheme, View } from "react-native";
+import { Platform, useColorScheme } from "react-native";
 import HomeIcon from "@/assets/icons/home.svg";
 import LeaveIcon from "@/assets/icons/time.svg";
 import ApplicationIcon from "@/assets/icons/setting.svg";
@@ -29,27 +29,31 @@ export default function TabLayout() {
                 },
                 tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
                 tabBarButton: HapticTab,
-                tabBarStyle: Platform.select({
-                    ios: {
-                        // Use a transparent background on iOS to show the blur effect
-                        position: "absolute",
-                    },
-                    default: {
-                        height: 60,
-                    },
-                }),
+                tabBarStyle: {
+                    ...Platform.select({
+                        ios: {
+                            position: "absolute",
+                        },
+                        default: {
+                            height: 60,
+                        },
+                    }),
+                },
                 tabBarLabelStyle: {
                     fontSize: 12,
                     paddingTop: 2,
                     color: Colors[colorScheme ?? "light"].text,
                 },
             }}
+            initialRouteName="(home)"
         >
             <Tabs.Screen
-                name="index"
+                name="(home)"
                 options={{
                     title: "Home",
-                    headerTitleStyle: { display: "none" },
+                    headerTitleStyle: {
+                        display: "none",
+                    },
                     headerLeft: () => <HeaderProfileOptions router={router} />,
                     tabBarIcon: () => <HomeIcon name="house.fill" />,
                 }}
