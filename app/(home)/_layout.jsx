@@ -21,7 +21,10 @@ export default function HomeLayout() {
                     headerLeft: () => <HeaderProfileOptions router={router} />,
                 }}
             />
-            <Stack.Screen name="profile" options={{ title: "Profile" }} />
+            <Stack.Screen
+                name="profile"
+                options={{ title: "Profile", headerShown: false }}
+            />
         </Stack>
     );
 }
