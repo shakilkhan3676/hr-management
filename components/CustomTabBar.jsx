@@ -26,7 +26,11 @@ export default function CustomTabBar() {
             icon: <ApplicationIcon width={24} height={24} />,
             label: "Apps",
         },
-        { route: "(ai)", icon: <AIicon width={24} height={24} />, label: "AI" },
+        {
+            route: "(ai)",
+            icon: <AIicon width={24} height={24} />,
+            label: "Daffodil AI",
+        },
     ];
 
     return (
@@ -88,11 +92,12 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 12,
-        color: "#888",
+        color: "#6b7280",
         marginTop: 2,
+        fontWeight: "600",
     },
     activeLabel: {
-        color: "#000",
+        color: "#4b5563",
         fontWeight: "bold",
     },
 });
