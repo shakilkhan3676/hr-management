@@ -19,16 +19,16 @@ export const getScreenOptions = (router) => {
             backgroundColor: Colors[colorScheme ?? "light"].background,
         },
         headerShadowVisible: false,
-        headerLeft: () => (
-            <TouchableOpacity
-                onPress={() => router.canGoBack() && router.back()}
-                activeOpacity={0.6}
-                style={{ justifyContent: "center" }}
-                className="flex items-center justify-center w-10 h-10 border border-gray-300 rounded-full"
-            >
-                <Ionicons name="chevron-back" size={22} color="#171621" />
-            </TouchableOpacity>
-        ),
+        // headerLeft: () => (
+        //     <TouchableOpacity
+        //         onPress={() => router.canGoBack() && router.back()}
+        //         activeOpacity={0.6}
+        //         style={{ justifyContent: "center" }}
+        //         className="flex items-center justify-center w-10 h-10 border border-gray-300 rounded-full"
+        //     >
+        //         <Ionicons name="chevron-back" size={22} color="#171621" />
+        //     </TouchableOpacity>
+        // ),
         headerRight: () => (
             <TouchableOpacity
                 activeOpacity={0.6}

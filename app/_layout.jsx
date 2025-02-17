@@ -39,8 +39,14 @@ export default function RootLayout() {
         >
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <BottomSheetModalProvider>
-                    <Stack screenOptions={{ headerShown: false }}>
-                        <Stack.Screen name="(tabs)" />
+                    <Stack
+                        screenOptions={{ headerShown: false }}
+                        initialRouteName="(home)"
+                    >
+                        <Stack.Screen name="(home)" />
+                        <Stack.Screen name="(leave)" />
+                        <Stack.Screen name="(applications)" />
+                        <Stack.Screen name="(ai)" />
                         <Stack.Screen name="+not-found" />
                     </Stack>
                     <StatusBar style="auto" />

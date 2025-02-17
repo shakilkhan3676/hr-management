@@ -16,6 +16,8 @@ import EmployeeIcon from "@/assets/icons/briefcase.svg";
 import AttendanceIcon from "@/assets/icons/clock.svg";
 import PaySlipIcon from "@/assets/icons/wallet-arrow.svg";
 import { router } from "expo-router";
+import CustomTabBar from "@/components/CustomTabBar"; // Import Custom Tab Bar
+
 const { width } = Dimensions.get("window");
 
 export default function Index() {
@@ -45,6 +47,7 @@ export default function Index() {
             icon: PaySlipIcon,
         },
     ];
+
     return (
         <SafeAreaView
             className={`flex-1 bg-[${Colors.light.background}]`}
@@ -55,7 +58,7 @@ export default function Index() {
         >
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ gap: 16 }}
+                contentContainerStyle={{ gap: 16, paddingBottom: 80 }} // Add padding bottom for tab bar
             >
                 <ProfileCard />
 
@@ -94,6 +97,9 @@ export default function Index() {
                     ))}
                 </View>
             </ScrollView>
+
+            {/* Custom Tab Bar at the Bottom */}
+            <CustomTabBar />
         </SafeAreaView>
     );
 }
