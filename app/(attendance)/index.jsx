@@ -5,9 +5,10 @@ import {
     Platform,
     Dimensions,
     ScrollView,
+    TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import { Badge, Button } from "react-native-paper";
+import { Badge, Button, TouchableRipple } from "react-native-paper";
 import CategoryCard from "@/components/home/CategoryCard";
 import { router } from "expo-router";
 import PunchIcon from "@/assets/icons/time-past.svg";
@@ -15,11 +16,41 @@ import TimeTrackIcon from "@/assets/icons/hourglass-end.svg";
 import ScheduleIcon from "@/assets/icons/calendar-clock.svg";
 import LeaveIcon from "@/assets/icons/leave.svg";
 import ManualIcon from "@/assets/icons/calendar-exclamation.svg";
-import ManualLeaveCard from "../../components/attendance/ManualLeaveCard";
+import SliderIcon from "@/assets/icons/settings-sliders.svg";
+import ManualLeaveCard from "@/components/attendance/ManualLeaveCard";
+import CustomDropdownButton from "@/components/CustomDropdownButton";
+import { Entypo, Feather, MaterialIcons } from "@expo/vector-icons";
 
 const index = () => {
     const [activeButton, setActiveButton] = useState("attendance");
     const { width } = Dimensions.get("window");
+    const [currentStatus, setCurrentStatus] = useState("All");
+    console.log("🚀 ~ index ~ currentStatus:", currentStatus);
+    const [sortingValue, setSortingValue] = useState("");
+
+    const sortingData = [
+        {
+            icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
+            label: "Approved",
+            value: "1",
+        },
+        {
+            icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
+            label: "Rejected",
+            value: "2",
+        },
+        {
+            icon: (
+                <MaterialIcons
+                    name="check-box-outline-blank"
+                    size={24}
+                    color="#4b5563"
+                />
+            ),
+            label: "Select",
+            value: "3",
+        },
+    ];
 
     const categories = [
         {
@@ -61,6 +92,7 @@ const index = () => {
                 marginTop: Platform.OS === "ios" ? 15 : 0,
             }}
         >
+            {/* Leave Status Header Buttons */}
             <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
                 <Button
                     mode="contained"
@@ -126,17 +158,85 @@ const index = () => {
                     ))}
                 </View>
             ) : (
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{
-                        gap: 16,
-                        padding: 16,
-                    }}
-                >
-                    <ManualLeaveCard />
-                    <ManualLeaveCard />
-                    <ManualLeaveCard />
-                </ScrollView>
+                <View className={`flex-1`}>
+                    <View className="relative flex-row items-center justify-between mx-4 border-b-2 border-gray-300 pt-">
+                        {/* Tabs */}
+                        {["All", "Pending", "Rejected"].map((status) => (
+                            <TouchableOpacity
+                                key={status}
+                                activeOpacity={0.6}
+                                className="relative flex items-center justify-center w-1/4"
+                                onPress={() => setCurrentStatus(status)}
+                            >
+                                <Text
+                                    className={`text-lg ${
+                                        currentStatus === status
+                                            ? "text-blue-800 font-semibold"
+                                            : "text-gray-600"
+                                    }`}
+                                >
+                                    {status}
+                                </Text>
+
+                                {/* Active Tab Indicator - Positioned on top of parent border */}
+                                {currentStatus === status && (
+                                    <View className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-blue-800" />
+                                )}
+                            </TouchableOpacity>
+                        ))}
+
+                        {/* Search Icon (No Border) */}
+                        <View className="w-[12.5%] flex items-center">
+                            <TouchableRipple
+                                onPress={() => console.log("Search Pressed")}
+                                borderless={true}
+                                style={{
+                                    borderRadius: 100,
+                                    padding: 6,
+                                }}
+                            >
+                                <Feather
+                                    name="search"
+                                    size={26}
+                                    color="#09509E"
+                                />
+                            </TouchableRipple>
+                        </View>
+
+                        {/* Filter Dropdown (No Border) */}
+                        <View className="w-[12.5%] flex items-center">
+                            <CustomDropdownButton
+                                value={sortingValue}
+                                data={sortingData}
+                                onChange={(item) => setSortingValue(item.value)}
+                                buttonStyle={{
+                                    width: 35,
+                                    height: 35,
+                                    paddingHorizontal: 0,
+                                    backgroundColor: "transparent",
+                                    borderWidth: 0,
+                                }}
+                                containerWidth={135}
+                                containerPosition={135}
+                            >
+                                <TouchableRipple className="p-2">
+                                    <SliderIcon height={22} width={22} />
+                                </TouchableRipple>
+                            </CustomDropdownButton>
+                        </View>
+                    </View>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={{
+                            gap: 16,
+                            padding: 16,
+                        }}
+                    >
+                        <ManualLeaveCard />
+                        <ManualLeaveCard />
+                        <ManualLeaveCard />
+                    </ScrollView>
+                </View>
             )}
         </SafeAreaView>
     );

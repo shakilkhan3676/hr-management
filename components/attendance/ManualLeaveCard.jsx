@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 
