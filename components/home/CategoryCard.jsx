@@ -13,7 +13,7 @@ const CategoryCard = React.memo(({ category, width, onPress }) => (
                 <View className="flex items-center justify-center w-12 h-12 p-2 bg-blue-100 rounded-full">
                     <category.icon />
                 </View>
-                <Text className="text-lg font-semibold">{category.name}</Text>
+                <Text className="text-lg">{category.name}</Text>
             </View>
         </TouchableRipple>
     </View>

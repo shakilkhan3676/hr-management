@@ -30,15 +30,15 @@ export default function Index() {
         },
         {
             id: 2,
-            name: "Employee visit",
-            router: "employeeVisit",
-            icon: EmployeeIcon,
+            name: "Attendance",
+            router: "(attendance)",
+            icon: AttendanceIcon,
         },
         {
             id: 3,
-            name: "Attendance",
-            router: "attendance",
-            icon: AttendanceIcon,
+            name: "Employee visit",
+            router: "employeeVisit",
+            icon: EmployeeIcon,
         },
         {
             id: 4,
