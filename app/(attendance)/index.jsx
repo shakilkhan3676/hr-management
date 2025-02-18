@@ -19,13 +19,12 @@ import ManualIcon from "@/assets/icons/calendar-exclamation.svg";
 import SliderIcon from "@/assets/icons/settings-sliders.svg";
 import ManualLeaveCard from "@/components/attendance/ManualLeaveCard";
 import CustomDropdownButton from "@/components/CustomDropdownButton";
-import { Entypo, Feather, MaterialIcons } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 
 const index = () => {
     const [activeButton, setActiveButton] = useState("attendance");
     const { width } = Dimensions.get("window");
     const [currentStatus, setCurrentStatus] = useState("All");
-    console.log("🚀 ~ index ~ currentStatus:", currentStatus);
     const [sortingValue, setSortingValue] = useState("");
 
     const sortingData = [
@@ -159,7 +158,7 @@ const index = () => {
                 </View>
             ) : (
                 <View className={`flex-1`}>
-                    <View className="relative flex-row items-center justify-between mx-4 border-b-2 border-gray-300 pt-">
+                    <View className="relative flex-row items-center justify-between mx-4 border-b-2 border-gray-300">
                         {/* Tabs */}
                         {["All", "Pending", "Rejected"].map((status) => (
                             <TouchableOpacity

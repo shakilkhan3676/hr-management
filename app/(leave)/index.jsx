@@ -4,22 +4,19 @@ import {
     SafeAreaView,
     Platform,
     TouchableOpacity,
-    StyleSheet,
     ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { router } from "expo-router";
-
 import MyLeave from "@/components/leave/MyLeave";
 import DynamicTable from "@/components/leave/DynamicTable";
 import SelectableBottomSheet from "@/components/SelectableBottomSheet";
 import ModalYearPicker from "@/components/ModalYearPicker";
 import LeaveCard from "@/components/leave/LeaveCard";
-
+import SliderIcon from "@/assets/icons/settings-sliders.svg";
 import { Badge, Button, TouchableRipple } from "react-native-paper";
 import {
     Feather,
-    Entypo,
     Ionicons,
     AntDesign,
     MaterialIcons,
@@ -38,7 +35,7 @@ const leave = () => {
     const [value, setValue] = useState("3");
     console.log("🚀 ~ leave ~ value:", value);
     const [sortingValue, setSortingValue] = useState("");
-    console.log("🚀 ~ leave ~ sortingValue:", sortingValue);
+    const [currentStatus, setCurrentStatus] = useState("All");
 
     const role = "manager";
     const sampleData = [
@@ -340,30 +337,38 @@ const leave = () => {
             ) : (
                 <>
                     <View className={`flex-1`}>
-                        <View className="flex-row items-center justify-between gap-2 py-2 mx-4 border-b border-gray-300">
-                            <Text className="text-lg font-semibold">
-                                Approval info.
-                            </Text>
-                            <View className="flex-row items-center justify-center gap-2">
-                                <CustomDropdownButton
-                                    value={value}
-                                    data={filterData}
-                                    onChange={(item) => setValue(item.value)}
-                                    buttonStyle={{
-                                        backgroundColor:
-                                            value !== "3"
-                                                ? "#8097B0"
-                                                : "#E3E5E4",
-                                        borderColor:
-                                            value !== "3"
-                                                ? "#8097B0"
-                                                : "#d1d5db",
-                                        color:
-                                            value !== "3" ? "white" : "#4b5563",
-                                    }}
-                                />
+                        <View className="relative flex-row items-center justify-between mx-4 border-b-2 border-gray-300">
+                            {/* Tabs */}
+                            {["All", "Pending", "Rejected"].map((status) => (
+                                <TouchableOpacity
+                                    key={status}
+                                    activeOpacity={0.6}
+                                    className="relative flex items-center justify-center w-1/4"
+                                    onPress={() => setCurrentStatus(status)}
+                                >
+                                    <Text
+                                        className={`text-lg ${
+                                            currentStatus === status
+                                                ? "text-blue-800 font-semibold"
+                                                : "text-gray-600"
+                                        }`}
+                                    >
+                                        {status}
+                                    </Text>
+
+                                    {/* Active Tab Indicator - Positioned on top of parent border */}
+                                    {currentStatus === status && (
+                                        <View className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-blue-800" />
+                                    )}
+                                </TouchableOpacity>
+                            ))}
+
+                            {/* Search Icon (No Border) */}
+                            <View className="w-[12.5%] flex items-center">
                                 <TouchableRipple
-                                    onPress={() => console.log("Pressed 1")}
+                                    onPress={() =>
+                                        console.log("Search Pressed")
+                                    }
                                     borderless={true}
                                     style={{
                                         borderRadius: 100,
@@ -371,12 +376,15 @@ const leave = () => {
                                     }}
                                 >
                                     <Feather
-                                        className="text-right text-rose-500"
                                         name="search"
                                         size={26}
                                         color="#09509E"
                                     />
                                 </TouchableRipple>
+                            </View>
+
+                            {/* Filter Dropdown (No Border) */}
+                            <View className="w-[12.5%] flex items-center">
                                 <CustomDropdownButton
                                     value={sortingValue}
                                     data={sortingData}
@@ -394,11 +402,7 @@ const leave = () => {
                                     containerPosition={135}
                                 >
                                     <TouchableRipple className="p-2">
-                                        <Entypo
-                                            name="sound-mix"
-                                            size={22}
-                                            color="#4b5563"
-                                        />
+                                        <SliderIcon height={22} width={22} />
                                     </TouchableRipple>
                                 </CustomDropdownButton>
                             </View>
