@@ -8,6 +8,7 @@ import TimeTrackIcon from "@/assets/icons/hourglass-end.svg";
 import ScheduleIcon from "@/assets/icons/calendar-clock.svg";
 import LeaveIcon from "@/assets/icons/leave.svg";
 import ManualIcon from "@/assets/icons/calendar-exclamation.svg";
+import ManualLeaveCard from "../../components/attendance/ManualLeaveCard";
 
 const index = () => {
     const [activeButton, setActiveButton] = useState("attendance");
@@ -118,7 +119,11 @@ const index = () => {
                     ))}
                 </View>
             ) : (
-                <Text>Approval</Text>
+                <View className="gap-4 mx-4">
+                    <ManualLeaveCard />
+                    <ManualLeaveCard />
+                    <ManualLeaveCard />
+                </View>
             )}
         </SafeAreaView>
     );
