@@ -3,24 +3,13 @@ import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 import { Entypo, Feather } from "@expo/vector-icons";
 
 const TableHeader = React.memo(({ onSearch }) => (
-    <View className="flex-row items-center justify-between px-5 py-3 bg-blue-200 h-14 gap23 rounded-tr-2xl rounded-tl-2xl">
-        <Text className="text-lg font-bold text-blue-600 w-[35%]">Period</Text>
-        <Text className="text-lg font-bold text-blue-600 w-[20%]">Days</Text>
-        <Text className="text-lg text-center font-bold text-blue-600 w-[30%]">
+    <View className="flex-row items-center justify-between px-5 py-3 bg-blue-100 h-14 gap23 rounded-tr-2xl rounded-tl-2xl">
+        <Text className="text-lg font-bold text-blue-800 w-[35%]">Period</Text>
+        <Text className="text-lg font-bold text-blue-800 w-[20%]">Days</Text>
+        <Text className="text-lg text-center font-bold text-blue-800 w-[30%]">
             Status
         </Text>
-        <TouchableOpacity
-            activeOpacity={0.5}
-            className="w-[15%]"
-            onPress={onSearch}
-        >
-            <Feather
-                className="text-right"
-                name="search"
-                size={24}
-                color="#2563eb"
-            />
-        </TouchableOpacity>
+        <Text className="w-[15%]"></Text>
     </View>
 ));
 
