@@ -5,7 +5,7 @@ import { Button } from "react-native-paper";
 
 const LeaveCard = ({ approved = false }) => {
     return (
-        <View className="flex p-4 bg-white rounded-xl">
+        <View className="flex p-4 bg-white rounded-2xl">
             <View className="flex-row items-center gap-3 pb-2 border-b border-gray-300">
                 <Image
                     className="w-16 h-16 border border-gray-300 rounded-full"
