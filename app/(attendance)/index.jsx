@@ -1,4 +1,11 @@
-import { View, Text, SafeAreaView, Platform, Dimensions } from "react-native";
+import {
+    View,
+    Text,
+    SafeAreaView,
+    Platform,
+    Dimensions,
+    ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import { Badge, Button } from "react-native-paper";
 import CategoryCard from "@/components/home/CategoryCard";
@@ -119,11 +126,17 @@ const index = () => {
                     ))}
                 </View>
             ) : (
-                <View className="gap-4 mx-4">
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{
+                        gap: 16,
+                        padding: 16,
+                    }}
+                >
                     <ManualLeaveCard />
                     <ManualLeaveCard />
                     <ManualLeaveCard />
-                </View>
+                </ScrollView>
             )}
         </SafeAreaView>
     );
