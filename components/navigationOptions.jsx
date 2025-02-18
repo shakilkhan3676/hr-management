@@ -34,6 +34,7 @@ export const getScreenOptions = (router) => {
                 activeOpacity={0.6}
                 style={{ justifyContent: "center" }}
                 className="flex items-center justify-center w-10 h-10 bg-white border border-gray-300 rounded-full"
+                onPress={() => router.push("notifications")}
             >
                 <BellIcon />
                 <View className="absolute w-3 h-3 bg-red-500 border-2 border-white rounded-full top-2 right-2" />
