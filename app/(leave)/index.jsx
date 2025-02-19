@@ -32,12 +32,11 @@ const leave = () => {
         type: "All",
     });
     const [showClearFilter, setShowClearFilter] = useState(false);
-    const [value, setValue] = useState("3");
-    console.log("🚀 ~ leave ~ value:", value);
-    const [sortingValue, setSortingValue] = useState("");
+    const [sortingValue, setSortingValue] = useState(null);
+    console.log("🚀 ~ leave ~ sortingValue:", sortingValue);
     const [currentStatus, setCurrentStatus] = useState("All");
-
     const role = "manager";
+
     const sampleData = [
         { date: "2024-11-14", duration: 65, status: "Approved" },
         { date: "2024-11-15", duration: 70, status: "Pending" },
@@ -62,34 +61,14 @@ const leave = () => {
         { date: "2024-11-16", duration: 75, status: "Rejected" },
     ];
 
-    const filterData = [
-        {
-            icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
-            label: "Approved",
-            value: "1",
-        },
-        {
-            icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
-            label: "Rejected",
-            value: "2",
-        },
-        {
-            icon: <Feather name="users" size={24} color="#4b5563" />,
-            label: "All",
-            value: "3",
-        },
-    ];
-
     const sortingData = [
         {
             icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
             label: "Approved",
-            value: "1",
         },
         {
             icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
             label: "Rejected",
-            value: "2",
         },
         {
             icon: (
@@ -100,7 +79,6 @@ const leave = () => {
                 />
             ),
             label: "Select",
-            value: "3",
         },
     ];
 
@@ -388,9 +366,14 @@ const leave = () => {
                                 <CustomDropdownButton
                                     value={sortingValue}
                                     data={sortingData}
-                                    onChange={(item) =>
-                                        setSortingValue(item.value)
-                                    }
+                                    onChange={(item) => {
+                                        if (item.label === "Select") {
+                                            router.push("select");
+                                            setSortingValue(null);
+                                        } else {
+                                            setSortingValue(item.label);
+                                        }
+                                    }}
                                     buttonStyle={{
                                         width: 35,
                                         height: 35,

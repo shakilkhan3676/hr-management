@@ -72,8 +72,8 @@ const CustomDropdownButton = ({
                 ) : (
                     <View style={styles.buttonTextContainer}>
                         <Text style={(styles.buttonText, buttonStyle)}>
-                            {data.find((item) => item.value === value)?.label ||
-                                buttonText}
+                            {data.find((item) => item?.label === value)
+                                ?.label || buttonText}
                         </Text>
                         <Ionicons
                             name="chevron-down"
@@ -117,10 +117,10 @@ const CustomDropdownButton = ({
                             {data.map((item) => (
                                 <TouchableOpacity
                                     activeOpacity={0.7}
-                                    key={item.value}
+                                    key={item?.label}
                                     style={[
                                         styles.item,
-                                        value === item.value &&
+                                        value === item?.label &&
                                             styles.selectedItem,
                                     ]}
                                     onPress={() => handleSelect(item)}
@@ -129,7 +129,7 @@ const CustomDropdownButton = ({
                                     <Text
                                         style={[
                                             styles.itemText,
-                                            value === item.value &&
+                                            value === item?.label &&
                                                 styles.selectedItemText,
                                         ]}
                                     >
