@@ -28,19 +28,7 @@ export default function HomeLayout() {
             />
             <Stack.Screen
                 name="notifications"
-                options={{
-                    title: "Notifications",
-
-                    headerRight: () => (
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            className="flex items-center justify-center px-4 py-1.5 border border-gray-600 rounded-lg"
-                            onPress={() => router.push("notifications")}
-                        >
-                            <Text className="">Clear All</Text>
-                        </TouchableOpacity>
-                    ),
-                }}
+                options={{ title: "Notifications" }}
             />
         </Stack>
     );
