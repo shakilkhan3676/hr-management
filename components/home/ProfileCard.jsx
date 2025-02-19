@@ -83,13 +83,12 @@ const ProfileCard = () => {
                             {"  "}
                             Virtual Card
                         </Text>
-                        <View className="p-1.5 bg-white rounded-lg">
-                            <QRCode
-                                value="your-qr-code-value"
-                                size={72}
-                                backgroundColor="transparent"
-                            />
-                        </View>
+                        <QRCode
+                            value="your-qr-code-value"
+                            size={80}
+                            backgroundColor="white"
+                            quietZone={6}
+                        />
                     </View>
                 </View>
             </View>
