@@ -9,6 +9,8 @@ import {
     Feather,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { router } from "expo-router";
+import QRCode from "react-native-qrcode-svg";
 
 const socialIcons = [
     {
@@ -32,21 +34,37 @@ const profile = () => {
     return (
         <SafeAreaView className="">
             <View className="relative flex items-center bg-blue-200 h-28">
+                <TouchableOpacity
+                    onPress={() => router.canGoBack() && router.back()}
+                    activeOpacity={0.6}
+                    style={{ justifyContent: "center" }}
+                    className="absolute bottom-0 items-center w-10 h-10 border border-[rgba(255,255,255,0.4)] rounded-full bg-[rgba(255,255,255,0.3)] left-4 top-4"
+                >
+                    <Ionicons name="chevron-back" size={22} color="#171621" />
+                </TouchableOpacity>
                 <View className="absolute bottom-0 translate-y-1/2 bg-green-200 rounded-full w-28 h-28"></View>
             </View>
 
-            <View className="gap-1 py-8 mx-5 mt-8">
+            <View className="items-center pt-8 mx-5 mt-8">
                 <Text className="text-xl font-bold text-center text-gray-700">
                     Md Shakil Khan
                 </Text>
                 <Text className="font-semibold text-center text-gray-500">
-                    Asst. Admin Officer
+                    Junior Software Engineer
                 </Text>
                 <Text className="text-center text-gray-500">
                     Daffodil International University
                 </Text>
+                <View className="mt-3 border-2 border-black">
+                    <QRCode
+                        value="your-qr-code-value"
+                        size={125}
+                        backgroundColor="transparent"
+                        quietZone={8}
+                    />
+                </View>
             </View>
-            <View className="gap-5 mx-5">
+            <View className="gap-5 py-5 mx-5">
                 <Button
                     mode="contained"
                     buttonColor="#2563eb"
@@ -65,6 +83,7 @@ const profile = () => {
                 >
                     Save Contact to Phone
                 </Button>
+
                 <Button
                     mode="contained"
                     buttonColor="#d1d5db"
@@ -85,10 +104,10 @@ const profile = () => {
                     )}
                     onPress={() => console.log("Pressed")}
                 >
-                    Share Profile
+                    Share Profile Link
                 </Button>
             </View>
-            <View className="gap-3 py-10 mx-5">
+            <View className="gap-3 py-4 mx-5">
                 <View className="flex-row items-center gap-3">
                     <MaterialIcons
                         name="mail-outline"

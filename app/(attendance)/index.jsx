@@ -1,123 +1,241 @@
-import { View, Text, StyleSheet, Dimensions, ScrollView ,SafeAreaView} from "react-native";
-import React from "react";
-import { Badge, Button } from "react-native-paper";
-import AttendanceCatCard from "../../components/home/AttendanceCatCard";
-import clock from "../../assets/AttendaceIocns/clock.svg";
-import time from "../../assets/AttendaceIocns/time.svg";
-import schedule from "../../assets/AttendaceIocns/schedule.svg";
-import absent from "../../assets/AttendaceIocns/absent.svg";
-import manual from "../../assets/AttendaceIocns/manual.svg";
-const { width } = Dimensions.get("window");
+import {
+    View,
+    Text,
+    SafeAreaView,
+    Platform,
+    Dimensions,
+    ScrollView,
+    TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
+import { Badge, Button, TouchableRipple } from "react-native-paper";
+import CategoryCard from "@/components/home/CategoryCard";
 import { router } from "expo-router";
-const attendance = () => {
-  const [activeButton, setActiveButton] = React.useState("approval");
+import PunchIcon from "@/assets/icons/time-past.svg";
+import TimeTrackIcon from "@/assets/icons/hourglass-end.svg";
+import ScheduleIcon from "@/assets/icons/calendar-clock.svg";
+import LeaveIcon from "@/assets/icons/leave.svg";
+import ManualIcon from "@/assets/icons/calendar-exclamation.svg";
+import SliderIcon from "@/assets/icons/settings-sliders.svg";
+import ManualLeaveCard from "@/components/attendance/ManualLeaveCard";
+import CustomDropdownButton from "@/components/CustomDropdownButton";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 
-  const categories = [
-    {
-      id: 1,
-      name: "Punch Logs",
-      router: "punchLogs",
-      icon: clock,
-    },
-    {
-      id: 2,
-      name: "Time Tracking",
-      router: "timeTracking",
-      icon: time,
-    },
-    {
-      id: 3,
-      name: "Schedule",
-      router: "schedule",
-      icon: schedule,
-    },
-    {
-      id: 4,
-      name: "Absent List",
-      router: "absentList",
-      icon: absent,
-    },
-    {
-      id: 5,
-      name: "Manual Attendance",
-      router: "manualAttendance",
-      icon: manual,
-    },
-  ];
+const index = () => {
+    const [activeButton, setActiveButton] = useState("attendance");
+    const { width } = Dimensions.get("window");
+    const [currentStatus, setCurrentStatus] = useState("All");
+    const [sortingValue, setSortingValue] = useState(null);
 
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.container}>
-          <Button
-            mode="contained"
-            buttonColor={
-              activeButton === "approval" ? "#2563eb" : "transparent"
-            }
-            textColor={activeButton === "approval" ? "white" : "#4b5563"}
-            rippleColor="rgba(0, 0, 0, 0.1)"
-            labelStyle={{
-              fontSize: 16,
-            }}
+    const sortingData = [
+        {
+            icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
+            label: "Approved",
+        },
+        {
+            icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
+            label: "Rejected",
+        },
+        {
+            icon: (
+                <MaterialIcons
+                    name="check-box-outline-blank"
+                    size={24}
+                    color="#4b5563"
+                />
+            ),
+            label: "Select",
+        },
+    ];
+
+    const categories = [
+        {
+            id: 1,
+            name: "Punch Logs",
+            router: "punchLogs",
+            icon: PunchIcon,
+        },
+        {
+            id: 2,
+            name: "Time Tracking",
+            router: "timeTracking",
+            icon: TimeTrackIcon,
+        },
+        {
+            id: 3,
+            name: "Schedule",
+            router: "schedule",
+            icon: ScheduleIcon,
+        },
+        {
+            id: 4,
+            name: "Absent List",
+            router: "absentList",
+            icon: LeaveIcon,
+        },
+        {
+            id: 5,
+            name: "Manual Attendance",
+            router: "manualAttendance",
+            icon: ManualIcon,
+        },
+    ];
+
+    return (
+        <SafeAreaView
             style={{
-              borderRadius: 50,
-              width: "50%",
+                flex: 1,
+                marginTop: Platform.OS === "ios" ? 15 : 0,
             }}
-            icon={() => <Badge size={22}>4</Badge>}
-            contentStyle={{
-              flexDirection: "row-reverse", // This will put the badge after the text
-            }}
-            onPress={() => setActiveButton("approval")}
-          >
-            Approval
-          </Button>
+        >
+            {/* Leave Status Header Buttons */}
+            <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
+                <Button
+                    mode="contained"
+                    buttonColor={
+                        activeButton === "approval" ? "#2563eb" : "transparent"
+                    }
+                    textColor={
+                        activeButton === "approval" ? "white" : "#4b5563"
+                    }
+                    rippleColor="rgba(0, 0, 0, 0.1)"
+                    labelStyle={{
+                        fontSize: 16,
+                    }}
+                    style={{
+                        borderRadius: 50,
+                        width: "50%",
+                    }}
+                    icon={() => <Badge size={22}>10</Badge>}
+                    contentStyle={{
+                        flexDirection: "row-reverse", // This will put the badge after the text
+                    }}
+                    onPress={() => setActiveButton("approval")}
+                >
+                    Approval
+                </Button>
 
-          <Button
-            mode="contained"
-            buttonColor={activeButton === "request" ? "#2563eb" : "transparent"}
-            textColor={activeButton === "request" ? "white" : "#4b5563"}
-            rippleColor="rgba(0, 0, 0, 0.1)"
-            labelStyle={{
-              fontSize: 16,
-            }}
-            style={{
-              borderRadius: 50,
-              width: "50%",
-            }}
-            onPress={() => setActiveButton("request")}
-          >
-            My Attendace
-          </Button>
-        </View>
+                <Button
+                    mode="contained"
+                    buttonColor={
+                        activeButton === "attendance"
+                            ? "#2563eb"
+                            : "transparent"
+                    }
+                    textColor={
+                        activeButton === "attendance" ? "white" : "#4b5563"
+                    }
+                    rippleColor="rgba(0, 0, 0, 0.1)"
+                    labelStyle={{
+                        fontSize: 16,
+                    }}
+                    style={{
+                        borderRadius: 50,
+                        width: "50%",
+                    }}
+                    onPress={() => setActiveButton("attendance")}
+                >
+                    My Attendance
+                </Button>
+            </View>
 
-        {/* Category Section */}
-        <View className="flex-row flex-wrap gap-4 mx-4 pt-3">
-          {categories?.map((category) => (
-            <AttendanceCatCard
-              key={category.id}
-              category={category}
-              width={width}
-              onPress={() => {
-                router.push(category.router);
-              }}
-            />
-          ))}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+            {activeButton === "attendance" ? (
+                <View className="flex-row flex-wrap gap-4 mx-4">
+                    {categories.map((category) => (
+                        <CategoryCard
+                            key={category.id}
+                            category={category}
+                            width={width}
+                            onPress={() => {
+                                console.log("Pressed", category.name);
+                                router.push(category.router);
+                            }}
+                        />
+                    ))}
+                </View>
+            ) : (
+                <View className={`flex-1`}>
+                    <View className="relative flex-row items-center justify-between mx-4 border-b-2 border-gray-300">
+                        {/* Tabs */}
+                        {["All", "Pending", "Rejected"].map((status) => (
+                            <TouchableOpacity
+                                key={status}
+                                activeOpacity={0.6}
+                                className="relative flex items-center justify-center w-1/4"
+                                onPress={() => setCurrentStatus(status)}
+                            >
+                                <Text
+                                    className={`text-lg ${
+                                        currentStatus === status
+                                            ? "text-blue-800 font-semibold"
+                                            : "text-gray-600"
+                                    }`}
+                                >
+                                    {status}
+                                </Text>
+
+                                {/* Active Tab Indicator - Positioned on top of parent border */}
+                                {currentStatus === status && (
+                                    <View className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-blue-800" />
+                                )}
+                            </TouchableOpacity>
+                        ))}
+
+                        {/* Search Icon (No Border) */}
+                        <View className="w-[12.5%] flex items-center">
+                            <TouchableRipple
+                                onPress={() => console.log("Search Pressed")}
+                                borderless={true}
+                                style={{
+                                    borderRadius: 100,
+                                    padding: 6,
+                                }}
+                            >
+                                <Feather
+                                    name="search"
+                                    size={26}
+                                    color="#09509E"
+                                />
+                            </TouchableRipple>
+                        </View>
+
+                        {/* Filter Dropdown (No Border) */}
+                        <View className="w-[12.5%] flex items-center">
+                            <CustomDropdownButton
+                                value={sortingValue}
+                                data={sortingData}
+                                onChange={(item) => setSortingValue(item.label)}
+                                buttonStyle={{
+                                    width: 35,
+                                    height: 35,
+                                    paddingHorizontal: 0,
+                                    backgroundColor: "transparent",
+                                    borderWidth: 0,
+                                }}
+                                containerWidth={135}
+                                containerPosition={135}
+                            >
+                                <TouchableRipple className="p-2">
+                                    <SliderIcon height={22} width={22} />
+                                </TouchableRipple>
+                            </CustomDropdownButton>
+                        </View>
+                    </View>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={{
+                            gap: 16,
+                            padding: 16,
+                        }}
+                    >
+                        <ManualLeaveCard />
+                        <ManualLeaveCard />
+                        <ManualLeaveCard />
+                    </ScrollView>
+                </View>
+            )}
+        </SafeAreaView>
+    );
 };
 
-export default attendance;
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    borderColor: "#82BDF7",
-    borderWidth: 1,
-    borderRadius: 50,
-    margin: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-  },
-});
+export default index;
