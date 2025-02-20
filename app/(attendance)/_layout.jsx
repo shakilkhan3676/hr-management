@@ -1,16 +1,31 @@
 import { Stack, useRouter } from "expo-router";
 import { getScreenOptions } from "@/components/navigationOptions";
 
-export default function ApplicationsLayout() {
-    const router = useRouter();
+export default function AttendanceLayout() {
+  const router = useRouter();
 
-    return (
-        <Stack
-            screenOptions={{
-                ...getScreenOptions(router),
-            }}
-        >
-            <Stack.Screen name="index" options={{ title: "Attendance" }} />
-        </Stack>
-    );
+  const screens = [
+    { name: "index", title: "Attendance" },
+    { name: "punchLogs", title: "Punch Logs" },
+    { name: "timeTracking", title: "Time Tracking" },
+    { name: "Schedule", title: "Schedule" },
+    { name: "absentList", title: "Absent List" },
+    { name: "manualAttendance", title: "Manual Attendance" },
+  ];
+
+  return (
+    <Stack
+      screenOptions={{
+        ...getScreenOptions(router),
+      }}
+    >
+      {screens.map((screen) => (
+        <Stack.Screen
+          key={screen.name}
+          name={screen.name}
+          options={{ title: screen.title,headerShown:screen.name==="index"?true:false }}
+        />
+      ))}
+    </Stack>
+  );
 }
