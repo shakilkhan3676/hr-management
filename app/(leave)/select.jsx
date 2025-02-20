@@ -1,16 +1,48 @@
-import { View, SafeAreaView } from "react-native";
-import React, { useState } from "react"; // Add useState
-import { router, Stack } from "expo-router";
+import { View, SafeAreaView, Alert } from "react-native";
+import React, { useEffect, useState } from "react"; // Add useState
+import { router, Stack, useNavigation } from "expo-router";
 import { Button, TouchableRipple } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import SelectableLeaveCard from "@/components/leave/SelectableLeaveCard";
+import WarningModal from "../../components/leave/WarningModal";
 
 const select = () => {
+    const navigation = useNavigation();
     const [selectedItems, setSelectedItems] = useState(new Set());
-    console.log("🚀 ~ select ~ selectedItems:", selectedItems);
     const [isSelectionMode, setIsSelectionMode] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
+    const [pendingNavigation, setPendingNavigation] = useState(null);
 
     const leaveItems = [{ id: "1" }, { id: "2" }, { id: "3" }];
+
+    // Add navigation listener for back button
+    useEffect(() => {
+        const unsubscribe = navigation.addListener("beforeRemove", (e) => {
+            if (!isSelectionMode) {
+                return;
+            }
+
+            e.preventDefault();
+            setShowWarningModal(true);
+            setPendingNavigation(e.data.action);
+        });
+
+        return unsubscribe;
+    }, [navigation, isSelectionMode]);
+
+    const handleDiscard = () => {
+        setSelectedItems(new Set());
+        setIsSelectionMode(false);
+        setShowWarningModal(false);
+        if (pendingNavigation) {
+            navigation.dispatch(pendingNavigation);
+        }
+    };
+
+    const handleCancel = () => {
+        setShowWarningModal(false);
+        setPendingNavigation(null);
+    };
 
     // Handle long press to start selection mode
     const handleSelect = (itemId) => {
@@ -120,7 +152,6 @@ const select = () => {
             </SafeAreaView>
 
             {/* Bottom Buttons - only show when in selection mode */}
-
             <View
                 className="absolute bottom-0 flex-row items-start justify-center w-full h-24 gap-4 px-4 bg-white"
                 style={{
@@ -177,6 +208,12 @@ const select = () => {
                     APPROVE SELECTED
                 </Button>
             </View>
+
+            <WarningModal
+                visible={showWarningModal}
+                onCancel={handleCancel}
+                onDiscard={handleDiscard}
+            />
         </>
     );
 };
