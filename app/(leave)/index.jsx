@@ -368,7 +368,15 @@ const leave = () => {
                                     data={sortingData}
                                     onChange={(item) => {
                                         if (item.label === "Select") {
-                                            router.push("select");
+                                            router.push({
+                                                pathname: "select",
+                                                params: {
+                                                    pendingLeave:
+                                                        JSON.stringify(
+                                                            sampleData
+                                                        ),
+                                                },
+                                            });
                                             setSortingValue(null);
                                         } else {
                                             setSortingValue(item.label);
