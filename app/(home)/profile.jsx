@@ -45,7 +45,7 @@ const profile = () => {
                 <View className="absolute bottom-0 translate-y-1/2 bg-green-200 rounded-full w-28 h-28"></View>
             </View>
 
-            <View className="items-center gap-1 pt-8 mx-5 mt-8">
+            <View className="items-center pt-8 mx-5 mt-8">
                 <Text className="text-xl font-bold text-center text-gray-700">
                     Md Shakil Khan
                 </Text>
@@ -58,13 +58,13 @@ const profile = () => {
                 <View className="mt-3 border-2 border-black">
                     <QRCode
                         value="your-qr-code-value"
-                        size={160}
+                        size={125}
                         backgroundColor="transparent"
-                        quietZone={10}
+                        quietZone={8}
                     />
                 </View>
             </View>
-            <View className="gap-5 py-6 mx-5">
+            <View className="gap-5 py-5 mx-5">
                 <Button
                     mode="contained"
                     buttonColor="#2563eb"
