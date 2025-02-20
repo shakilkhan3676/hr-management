@@ -25,18 +25,16 @@ const index = () => {
     const [activeButton, setActiveButton] = useState("attendance");
     const { width } = Dimensions.get("window");
     const [currentStatus, setCurrentStatus] = useState("All");
-    const [sortingValue, setSortingValue] = useState("");
+    const [sortingValue, setSortingValue] = useState(null);
 
     const sortingData = [
         {
             icon: <MaterialIcons name="check" size={24} color="#4b5563" />,
             label: "Approved",
-            value: "1",
         },
         {
             icon: <MaterialIcons name="clear" size={24} color="#4b5563" />,
             label: "Rejected",
-            value: "2",
         },
         {
             icon: (
@@ -47,7 +45,6 @@ const index = () => {
                 />
             ),
             label: "Select",
-            value: "3",
         },
     ];
 
@@ -207,7 +204,7 @@ const index = () => {
                             <CustomDropdownButton
                                 value={sortingValue}
                                 data={sortingData}
-                                onChange={(item) => setSortingValue(item.value)}
+                                onChange={(item) => setSortingValue(item.label)}
                                 buttonStyle={{
                                     width: 35,
                                     height: 35,
