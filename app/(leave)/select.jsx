@@ -1,10 +1,12 @@
-import { View, SafeAreaView, Alert } from "react-native";
+import { View, Alert, Platform } from "react-native";
 import React, { useEffect, useState } from "react"; // Add useState
-import { router, Stack, useNavigation } from "expo-router";
+import { useNavigation } from "expo-router";
 import { Button, TouchableRipple } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import SelectableLeaveCard from "@/components/leave/SelectableLeaveCard";
-import WarningModal from "../../components/leave/WarningModal";
+import WarningModal from "@/components/leave/WarningModal";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "@/components/Header";
 
 const select = () => {
     const navigation = useNavigation();
@@ -93,12 +95,17 @@ const select = () => {
 
     return (
         <>
-            <Stack.Screen
-                options={{
-                    title: isSelectionMode
-                        ? `${selectedItems.size} Selected`
-                        : "Select Items",
-                    headerRight: () => (
+            <SafeAreaView
+                className="flex-1"
+                style={{ marginBottom: Platform.OS === "ios" ? 50 : 84 }}
+            >
+                <Header
+                    title={
+                        isSelectionMode
+                            ? `${selectedItems.size} Selected`
+                            : "Select Items"
+                    }
+                    headerRight={
                         <Button
                             mode="contained"
                             buttonColor="transparent"
@@ -122,12 +129,10 @@ const select = () => {
                                 ? "Unselect All"
                                 : "Select All"}
                         </Button>
-                    ),
-                }}
-            />
-            <SafeAreaView className="flex-1 mb-24">
+                    }
+                />
                 <ScrollView
-                    className="mx-4"
+                    className="px-4"
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{
                         paddingVertical: 16,
