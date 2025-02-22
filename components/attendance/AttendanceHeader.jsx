@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
-import LeftIcon from "../../assets/icons/LeftIcon.svg";
-import BellIcon from "../../assets/icons/BellIcon.svg";
 import { useRouter } from "expo-router";
 import DatePickerModal from "./components/attendance/DatePickerModal";
+import Header from "@/components/Header";
 
-const AttendanceHeader = ({ pageName, onNotificationPress }) => {
+const AttendanceHeader = ({ pageName }) => {
     const router = useRouter();
     const [modalVisible, setModalVisible] = useState(false);
     const [startDate, setStartDate] = useState(null);
@@ -20,28 +19,13 @@ const AttendanceHeader = ({ pageName, onNotificationPress }) => {
     };
     return (
         <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                {/* Left Icon */}
-                <TouchableOpacity
-                    style={styles.leftIcon}
-                    onPress={() => router.canGoBack() && router.back()}
-                >
-                    <LeftIcon />
-                </TouchableOpacity>
+            <Header
+                title={pageName}
+                titleStyle={{ color: "white" }}
+                backButtonStyle={{ backgroundColor: "white" }}
+                headerContainerStyle={{ paddingHorizontal: 0 }}
+            />
 
-                {/* Page Name */}
-                <View style={styles.center}>
-                    <Text style={styles.pageName}>{pageName}</Text>
-                </View>
-
-                {/* Right Notification Icon */}
-                <TouchableOpacity
-                    style={styles.rightIcon}
-                    onPress={onNotificationPress}
-                >
-                    <BellIcon />
-                </TouchableOpacity>
-            </View>
             <TouchableOpacity
                 style={styles.monthContainer}
                 onPress={() => setModalVisible(true)}
@@ -87,7 +71,6 @@ const AttendanceHeader = ({ pageName, onNotificationPress }) => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
         backgroundColor: "#1680E1",
         paddingHorizontal: 16,
         paddingVertical: 10,
@@ -121,7 +104,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderRadius: 40,
         alignSelf: "flex-start",
-        marginTop: 30,
+        marginTop: 5,
     },
 });
 

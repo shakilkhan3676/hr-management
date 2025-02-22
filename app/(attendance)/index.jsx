@@ -83,7 +83,7 @@ const index = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Header title="Leave" />
+            <Header title="Attendance" />
 
             {/* Leave Status Header Buttons */}
             <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
