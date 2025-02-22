@@ -1,27 +1,14 @@
-import { Stack, useRouter } from "expo-router";
-import { getScreenOptions } from "@/components/navigationOptions";
-import { Text, TouchableOpacity } from "react-native";
+import { Stack } from "expo-router";
 
 export default function LeaveLayout() {
-    const router = useRouter();
-
     return (
-        <Stack
-            screenOptions={{
-                ...getScreenOptions(router),
-            }}
-        >
+        <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" options={{ title: "Leave" }} />
             <Stack.Screen
                 name="applyLeave"
                 options={{ title: "Apply Leave" }}
             />
-            <Stack.Screen
-                name="select"
-                options={{
-                    title: "Selected",
-                }}
-            />
+            <Stack.Screen name="select" options={{ title: "Selected" }} />
         </Stack>
     );
 }

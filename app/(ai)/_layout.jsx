@@ -1,15 +1,8 @@
-import { Stack, useRouter } from "expo-router";
-import { getScreenOptions } from "@/components/navigationOptions";
+import { Stack } from "expo-router";
 
 export default function AiLayout() {
-    const router = useRouter();
-
     return (
-        <Stack
-            screenOptions={{
-                ...getScreenOptions(router),
-            }}
-        >
+        <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" options={{ title: "AI" }} />
         </Stack>
     );

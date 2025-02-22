@@ -1,7 +1,6 @@
 import {
     View,
     Text,
-    SafeAreaView,
     Platform,
     TouchableOpacity,
     ScrollView,
@@ -23,6 +22,8 @@ import {
 } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import CustomDropdownButton from "@/components/CustomDropdownButton";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "@/components/Header";
 
 const leave = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -98,12 +99,8 @@ const leave = () => {
         { id: 5, name: "Study Leaves" },
     ];
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                marginTop: Platform.OS === "ios" ? 15 : 0,
-            }}
-        >
+        <SafeAreaView style={{ flex: 1 }}>
+            <Header title="Leave" />
             {/* Leave Status */}
             {role === "manager" && (
                 <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">

@@ -1,8 +1,6 @@
 import {
     View,
     Text,
-    SafeAreaView,
-    Platform,
     Dimensions,
     ScrollView,
     TouchableOpacity,
@@ -20,6 +18,8 @@ import SliderIcon from "@/assets/icons/settings-sliders.svg";
 import ManualLeaveCard from "@/components/attendance/ManualLeaveCard";
 import CustomDropdownButton from "@/components/CustomDropdownButton";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "@/components/Header";
 
 const index = () => {
     const [activeButton, setActiveButton] = useState("attendance");
@@ -82,12 +82,9 @@ const index = () => {
     ];
 
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                marginTop: Platform.OS === "ios" ? 15 : 0,
-            }}
-        >
+        <SafeAreaView style={{ flex: 1 }}>
+            <Header title="Leave" />
+
             {/* Leave Status Header Buttons */}
             <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
                 <Button

@@ -1,31 +1,17 @@
-import { Stack, useRouter } from "expo-router";
-import { getScreenOptions } from "@/components/navigationOptions";
+import { Stack } from "expo-router";
 
 export default function AttendanceLayout() {
-  const router = useRouter();
-
-  const screens = [
-    { name: "index", title: "Attendance" },
-    { name: "punchLogs", title: "Punch Logs" },
-    { name: "timeTracking", title: "Time Tracking" },
-    { name: "Schedule", title: "Schedule" },
-    { name: "absentList", title: "Absent List" },
-    { name: "manualAttendance", title: "Manual Attendance" },
-  ];
-
-  return (
-    <Stack
-      screenOptions={{
-        ...getScreenOptions(router),
-      }}
-    >
-      {screens.map((screen) => (
-        <Stack.Screen
-          key={screen.name}
-          name={screen.name}
-          options={{ title: screen.title,headerShown:screen.name==="index"?true:false }}
-        />
-      ))}
-    </Stack>
-  );
+    return (
+        <Stack screenOptions={{ headerShown: false }}>
+            <Screen name="index" options={{ title: "Attendance" }} />
+            <Screen name="punchLogs" options={{ title: "Punch Logs" }} />
+            <Screen name="timeTracking" options={{ title: "Time Tracking" }} />
+            <Screen name="Schedule" options={{ title: "Schedule" }} />
+            <Screen name="absentList" options={{ title: "Absent List" }} />
+            <Screen
+                name="manualAttendance"
+                options={{ title: "Manual Attendance" }}
+            />
+        </Stack>
+    );
 }

@@ -3,10 +3,10 @@ import { Colors } from "@/constants/Colors";
 import {
     Text,
     View,
-    SafeAreaView,
     Platform,
     ScrollView,
     Dimensions,
+    Image,
 } from "react-native";
 import ProfileCard from "@/components/home/ProfileCard";
 import CategoryCard from "@/components/home/CategoryCard";
@@ -16,7 +16,11 @@ import EmployeeIcon from "@/assets/icons/briefcase.svg";
 import AttendanceIcon from "@/assets/icons/clock.svg";
 import PaySlipIcon from "@/assets/icons/wallet-arrow.svg";
 import { router } from "expo-router";
-import CustomTabBar from "@/components/CustomTabBar"; // Import Custom Tab Bar
+import CustomTabBar from "@/components/CustomTabBar";
+import Header from "@/components/Header";
+import { HeaderProfileOptions } from "@/components/navigationOptions";
+import { TouchableRipple } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 
@@ -51,11 +55,32 @@ export default function Index() {
     return (
         <SafeAreaView
             className={`flex-1 bg-[${Colors.light.background}]`}
-            style={{
-                flex: 1,
-                marginTop: Platform.OS === "ios" ? 12 : 0,
-            }}
+            style={{ flex: 1 }}
         >
+            <Header
+                headerLeft={
+                    <>
+                        <TouchableRipple
+                            activeOpacity={0.6}
+                            onPress={() => console.log("Pressed")}
+                            borderless={true}
+                            className="flex items-center justify-center mr-3 border border-gray-300 rounded-full w-14 h-14"
+                        >
+                            <Image
+                                source={require("@/assets/images/profile.jpeg")}
+                                className="w-full h-full rounded-full"
+                                style={{ objectFit: "cover" }}
+                            />
+                        </TouchableRipple>
+                        <View className="w-200">
+                            <Text className="font-semibold">710003676</Text>
+                            <Text className="text-lg font-bold">
+                                Md Shakil Khan
+                            </Text>
+                        </View>
+                    </>
+                }
+            />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ gap: 16, paddingBottom: 80 }} // Add padding bottom for tab bar

@@ -9,6 +9,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BellIcon from "@/assets/icons/bell-linear.svg";
 import { Colors } from "@/constants/Colors";
+import { TouchableRipple } from "react-native-paper";
 
 export const getScreenOptions = (router) => {
     const colorScheme = useColorScheme();
@@ -46,8 +47,10 @@ export const getScreenOptions = (router) => {
 export const HeaderProfileOptions = (router) => {
     return (
         <>
-            <TouchableOpacity
+            <TouchableRipple
                 activeOpacity={0.6}
+                onPress={() => console.log("Pressed")}
+                borderless={true}
                 className="flex items-center justify-center mr-3 border border-gray-300 rounded-full w-14 h-14"
             >
                 <Image
@@ -55,8 +58,8 @@ export const HeaderProfileOptions = (router) => {
                     className="w-full h-full rounded-full"
                     style={{ objectFit: "cover" }}
                 />
-            </TouchableOpacity>
-            <View>
+            </TouchableRipple>
+            <View className="w-200">
                 <Text className="font-semibold">710003676</Text>
                 <Text className="text-lg font-bold">Md Shakil Khan</Text>
             </View>
