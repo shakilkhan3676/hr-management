@@ -18,7 +18,6 @@ import PaySlipIcon from "@/assets/icons/wallet-arrow.svg";
 import { router } from "expo-router";
 import CustomTabBar from "@/components/CustomTabBar";
 import Header from "@/components/Header";
-import { HeaderProfileOptions } from "@/components/navigationOptions";
 import { TouchableRipple } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
