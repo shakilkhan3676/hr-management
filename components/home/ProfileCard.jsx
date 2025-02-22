@@ -110,7 +110,6 @@ const ProfileCard = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 10,
         marginHorizontal: 16,
     },
     card: {
