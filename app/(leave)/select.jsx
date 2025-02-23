@@ -7,6 +7,7 @@ import SelectableLeaveCard from "@/components/leave/SelectableLeaveCard";
 import WarningModal from "@/components/leave/WarningModal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
+import { Colors } from "@/constants/Colors";
 
 const select = () => {
     const navigation = useNavigation();
@@ -160,7 +161,7 @@ const select = () => {
             <View className="absolute bottom-0 flex-row items-start justify-center w-full h-24 gap-4 px-4 bg-white">
                 <Button
                     mode="contained"
-                    buttonColor="#FE6B87"
+                    buttonColor={Colors.light.rejectButton}
                     textColor="white"
                     rippleColor="rgba(0, 0, 0, 0.1)"
                     disabled={selectedItems.size === 0}
@@ -182,7 +183,7 @@ const select = () => {
                 </Button>
                 <Button
                     mode="contained"
-                    buttonColor="#00B894"
+                    buttonColor={Colors.light.approveButton}
                     textColor="white"
                     rippleColor="rgba(0, 0, 0, 0.1)"
                     disabled={selectedItems.size === 0}

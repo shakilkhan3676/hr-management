@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
+import { Colors } from "@/constants/Colors";
 
 const LeaveCard = ({ approved = false }) => {
     return (
@@ -78,14 +79,14 @@ const LeaveCard = ({ approved = false }) => {
                         }}
                         onPress={() => console.log("Pressed")}
                     >
-                        Approve
+                        Approved
                     </Button>
                 </View>
             ) : (
                 <View className="flex-row items-center justify-between gap-5 pt-3">
                     <Button
                         mode="contained"
-                        buttonColor="#FE6B87"
+                        buttonColor={Colors.light.rejectButton}
                         textColor="white"
                         rippleColor="rgba(0, 0, 0, 0.1)"
                         icon={() => (
@@ -109,7 +110,7 @@ const LeaveCard = ({ approved = false }) => {
 
                     <Button
                         mode="contained"
-                        buttonColor="#00B894"
+                        buttonColor={Colors.light.approveButton}
                         textColor="white"
                         rippleColor="rgba(0, 0, 0, 0.1)"
                         icon={() => (
