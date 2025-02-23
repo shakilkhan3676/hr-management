@@ -31,16 +31,24 @@ const WarningModal = ({ visible, onCancel, onDiscard }) => {
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             labelStyle={styles.buttonLabel}
                             onPress={onCancel}
+                            style={{
+                                borderWidth: 0.5,
+                                borderColor: Colors.light.primaryButton,
+                            }}
                         >
                             Stay & Continue
                         </Button>
                         <Button
                             mode="contained"
-                            buttonColor="#1D1B201F"
+                            buttonColor={Colors.light.lightGrayishGreen}
                             textColor="#111827"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             labelStyle={styles.buttonLabel}
                             onPress={onDiscard}
+                            style={{
+                                borderWidth: 0.5,
+                                borderColor: Colors.light.grayButtonBorder,
+                            }}
                         >
                             I want to exit
                         </Button>

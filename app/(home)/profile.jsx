@@ -92,14 +92,14 @@ const profile = () => {
 
                     <Button
                         mode="contained"
-                        buttonColor="#d1d5db"
+                        buttonColor={Colors.light.lightGrayishGreen}
                         textColor="#374151"
                         rippleColor="rgba(0, 0, 0, 0.1)"
                         labelStyle={{ fontSize: 16, padding: 3 }}
                         style={{
                             borderRadius: 50,
                             borderWidth: 0.5,
-                            borderColor: "#9ca3af",
+                            borderColor: Colors.light.grayButtonBorder,
                         }}
                         icon={() => (
                             <Ionicons

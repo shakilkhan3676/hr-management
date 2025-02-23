@@ -17,6 +17,8 @@ export const Colors = {
         approveButton: "#00B894",
         rejectButton: "#FE6B87",
         checkoutButton: "#ED544E",
+        lightGrayishGreen: "#E7ECEA",
+        grayButtonBorder: "#D9D9D9",
         icon: "#6B7386",
         tabIconDefault: "#687076",
         tabIconSelected: tintColorLight,
