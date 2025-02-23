@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { useRouter, useSegments } from "expo-router";
 import HomeIcon from "@/assets/icons/home.svg";
 import LeaveIcon from "@/assets/icons/time.svg";
@@ -34,7 +34,6 @@ export default function CustomTabBar() {
     ];
 
     return (
-        // <SafeAreaView style={styles.safeArea}>
         <View style={styles.tabBar}>
             {tabs.map((tab) => {
                 const isActive = segments.includes(tab.route);
@@ -58,14 +57,10 @@ export default function CustomTabBar() {
                 );
             })}
         </View>
-        // </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
-        backgroundColor: "#fff",
-    },
     tabBar: {
         flexDirection: "row",
         justifyContent: "space-around",

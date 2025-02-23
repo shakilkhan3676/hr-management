@@ -33,7 +33,7 @@ const socialIcons = [
 
 const profile = () => {
     return (
-        <SafeAreaView className="">
+        <SafeAreaView className="flex-1">
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View className="relative flex items-center bg-blue-200 h-28">
                     <TouchableOpacity
