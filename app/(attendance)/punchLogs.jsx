@@ -1,17 +1,104 @@
-import { View, Text, StatusBar, Button } from "react-native";
-import React, { useRef } from "react";
+import { View, Text, StatusBar, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AttendanceHeader from "../../components/attendance/AttendanceHeader";
+import Header from "@/components/Header";
+import { AntDesign } from "@expo/vector-icons";
+import dayjs from "dayjs";
+import ModalRangeDatePicker from "@/components/ModalRangeDatePicker";
 
 const punchLogs = () => {
-    const bottomSheetRef = useRef(null);
+    const [dateRange, setDateRange] = useState({
+        startDate: undefined,
+        endDate: undefined,
+    });
+    console.log("🚀 ~ punchLogs ~ dateRange:", dateRange);
+    const [showClearFilter, setShowClearFilter] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const handleClearDateRange = () => {
+        setDateRange({
+            startDate: undefined,
+            endDate: undefined,
+        });
+        setShowClearFilter(false);
+    };
 
     return (
-        <SafeAreaView>
+        <>
             <StatusBar backgroundColor={"#1680E1"} barStyle={"light-content"} />
-            <AttendanceHeader pageName="Punch Logs" />
-            <Text>punchLogs</Text>
-        </SafeAreaView>
+            <SafeAreaView>
+                {/* Header Section */}
+                <View className="bg-[#1680E1] px-4 py-2 rounded-b-2xl">
+                    <Header
+                        title="Punch Logs"
+                        titleStyle={{ color: "white" }}
+                        backButtonStyle={{ backgroundColor: "white" }}
+                        headerContainerStyle={{ paddingHorizontal: 0 }}
+                    />
+                    <View className="flex-row items-center gap-3 pt-1 pb-2">
+                        <TouchableOpacity
+                            activeOpacity={0.6}
+                            className={`rounded-full py-1 px-3.5 flex-row items-center border ${
+                                dateRange.startDate
+                                    ? "bg-[#8097B0] border-[#8097B0]"
+                                    : "bg-[#E3E5E4] border-gray-300"
+                            }`}
+                            onPress={() => {
+                                setModalVisible(true);
+                            }}
+                        >
+                            <Text
+                                numberOfLines={1}
+                                className={`flex-shrink pr-[10px] text-center ${
+                                    dateRange.startDate
+                                        ? "text-white"
+                                        : "text-[#4b5563]"
+                                }`}
+                            >
+                                {dateRange.startDate
+                                    ? `${dayjs(dateRange.startDate).format(
+                                          "D MMM"
+                                      )} - ${dayjs(dateRange.endDate).format(
+                                          "D MMM"
+                                      )}`
+                                    : "This Year"}
+                            </Text>
+                            <AntDesign
+                                name="calendar"
+                                size={15}
+                                color={
+                                    dateRange.startDate ? "white" : "#4b5563"
+                                }
+                            />
+                        </TouchableOpacity>
+
+                        {showClearFilter && (
+                            <TouchableOpacity
+                                activeOpacity={0.6}
+                                className=" py-1 px-3.5 w-30"
+                                onPress={handleClearDateRange}
+                            >
+                                <Text className="font-semibold text-center text-white">
+                                    Clear All
+                                </Text>
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                </View>
+                <Text>punchLogs</Text>
+            </SafeAreaView>
+
+            {/* Modal Component with State */}
+            <ModalRangeDatePicker
+                visible={modalVisible}
+                onClose={() => setModalVisible(false)}
+                title="Select Date"
+                onSelectDate={(startDate, endDate) => {
+                    setDateRange({ startDate, endDate });
+                    setShowClearFilter(true);
+                }}
+            />
+        </>
     );
 };
 
