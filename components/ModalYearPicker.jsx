@@ -10,6 +10,7 @@ import {
 import { Button } from "react-native-paper";
 import dayjs from "dayjs";
 import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/constants/Colors";
 
 const ModalYearPicker = ({ visible, onClose, initialYear, onSelectYear }) => {
     const [selectedYear, setSelectedYear] = useState(initialYear);
@@ -92,7 +93,7 @@ const ModalYearPicker = ({ visible, onClose, initialYear, onSelectYear }) => {
                     <View style={styles.buttonContainer}>
                         <Button
                             mode="contained"
-                            buttonColor="#09509E"
+                            buttonColor={Colors.light.primaryButton}
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             style={styles.button}
@@ -171,8 +172,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     selectedYearButton: {
-        backgroundColor: "#09509E",
-        borderColor: "#09509E",
+        backgroundColor: Colors.light.primaryButton,
+        borderColor: Colors.light.primaryButton,
     },
     yearText: {
         fontSize: 16,
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
         padding: 2,
     },
     currentYearButton: {
-        borderColor: "#09509E",
+        borderColor: Colors.light.primaryButton,
         borderWidth: 1.5,
     },
 });

@@ -5,6 +5,7 @@ import QRCode from "react-native-qrcode-svg";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Button } from "react-native-paper";
 import { router } from "expo-router";
+import { Colors } from "@/constants/Colors";
 
 const ProfileCard = () => {
     return (
@@ -95,7 +96,7 @@ const ProfileCard = () => {
 
             <Button
                 mode="contained"
-                buttonColor="#ef4444"
+                buttonColor={Colors.light.checkoutButton}
                 textColor="white"
                 rippleColor="rgba(0, 0, 0, 0.1)"
                 labelStyle={{ fontSize: 16, padding: 3 }}

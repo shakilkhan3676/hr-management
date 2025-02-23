@@ -16,6 +16,7 @@ export const Colors = {
         groupButtonContainerBorder: "#82BDF7",
         approveButton: "#00B894",
         rejectButton: "#FE6B87",
+        checkoutButton: "#ED544E",
         icon: "#6B7386",
         tabIconDefault: "#687076",
         tabIconSelected: tintColorLight,
