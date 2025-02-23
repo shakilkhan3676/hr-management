@@ -20,6 +20,7 @@ import CustomDropdownButton from "@/components/CustomDropdownButton";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
+import { Colors } from "@/constants/Colors";
 
 const index = () => {
     const [activeButton, setActiveButton] = useState("attendance");
@@ -86,11 +87,19 @@ const index = () => {
             <Header title="Attendance" />
 
             {/* Leave Status Header Buttons */}
-            <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
+            <View
+                style={{
+                    backgroundColor: Colors.light.groupButtonContainer,
+                    borderColor: Colors.light.groupButtonContainerBorder,
+                }}
+                className={`flex-row items-center justify-center p-2 mx-4 mb-4 border rounded-full`}
+            >
                 <Button
                     mode="contained"
                     buttonColor={
-                        activeButton === "approval" ? "#2563eb" : "transparent"
+                        activeButton === "approval"
+                            ? `${Colors.light.primaryButton}`
+                            : "transparent"
                     }
                     textColor={
                         activeButton === "approval" ? "white" : "#4b5563"
@@ -116,7 +125,7 @@ const index = () => {
                     mode="contained"
                     buttonColor={
                         activeButton === "attendance"
-                            ? "#2563eb"
+                            ? `${Colors.light.primaryButton}`
                             : "transparent"
                     }
                     textColor={

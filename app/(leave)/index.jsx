@@ -24,6 +24,7 @@ import dayjs from "dayjs";
 import CustomDropdownButton from "@/components/CustomDropdownButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
+import { Colors } from "@/constants/Colors";
 
 const leave = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -103,12 +104,18 @@ const leave = () => {
             <Header title="Leave" />
             {/* Leave Status */}
             {role === "manager" && (
-                <View className="flex-row items-center justify-center p-2 mx-4 mb-4 bg-blue-100 border border-blue-300 rounded-full">
+                <View
+                    style={{
+                        backgroundColor: Colors.light.groupButtonContainer,
+                        borderColor: Colors.light.groupButtonContainerBorder,
+                    }}
+                    className="flex-row items-center justify-center p-2 mx-4 mb-4 border rounded-full"
+                >
                     <Button
                         mode="contained"
                         buttonColor={
                             activeButton === "approval"
-                                ? "#2563eb"
+                                ? `${Colors.light.primaryButton}`
                                 : "transparent"
                         }
                         textColor={
@@ -135,7 +142,7 @@ const leave = () => {
                         mode="contained"
                         buttonColor={
                             activeButton === "request"
-                                ? "#2563eb"
+                                ? `${Colors.light.primaryButton}`
                                 : "transparent"
                         }
                         textColor={
@@ -279,7 +286,7 @@ const leave = () => {
                     <View
                         className="absolute bottom-0 items-center w-full h-24 px-4 bg-white"
                         style={{
-                            shadowColor: "#2563eb",
+                            shadowColor: Colors.light.primaryButton,
                             shadowOffset: { width: 0, height: -2 },
                             shadowOpacity: 0.1,
                             shadowRadius: 5,
@@ -289,7 +296,7 @@ const leave = () => {
                     >
                         <Button
                             mode="contained"
-                            buttonColor="#2563eb"
+                            buttonColor={Colors.light.primaryButton}
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             labelStyle={{

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import DateTimePicker from "react-native-ui-datepicker";
 import { Button } from "react-native-paper";
+import { Colors } from "@/constants/Colors";
 
 const ModalRangeDatePicker = ({
     title,
@@ -69,7 +70,7 @@ const ModalRangeDatePicker = ({
                             setStartDate(startDate);
                             setEndDate(endDate);
                         }}
-                        selectedItemColor="#1680E1"
+                        selectedItemColor={Colors.light.primaryButton}
                         dayContainerStyle={{
                             borderRadius: 100,
                             height: 40,
@@ -90,7 +91,7 @@ const ModalRangeDatePicker = ({
                         </Button>
                         <Button
                             mode="contained"
-                            buttonColor="#1680E1"
+                            buttonColor={Colors.light.primaryButton}
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             style={styles.button}
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 9999,
         borderWidth: 1,
-        borderColor: "#1680E1",
+        borderColor: Colors.light.primaryButton,
     },
     cancelButton: {
         borderRadius: 9999,

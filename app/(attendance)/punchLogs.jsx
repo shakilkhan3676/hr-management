@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { AntDesign } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import ModalRangeDatePicker from "@/components/ModalRangeDatePicker";
+import { Colors } from "@/constants/Colors";
 
 const punchLogs = () => {
     const [dateRange, setDateRange] = useState({
@@ -25,10 +26,16 @@ const punchLogs = () => {
 
     return (
         <>
-            <StatusBar backgroundColor={"#1680E1"} barStyle={"light-content"} />
+            <StatusBar
+                backgroundColor={Colors.light.primaryButton}
+                barStyle={"light-content"}
+            />
             <SafeAreaView>
                 {/* Header Section */}
-                <View className="bg-[#1680E1] px-4 py-2 rounded-b-2xl">
+                <View
+                    style={{ backgroundColor: Colors.light.primaryButton }}
+                    className="bg-[] px-4 py-2 rounded-b-2xl"
+                >
                     <Header
                         title="Punch Logs"
                         titleStyle={{ color: "white" }}

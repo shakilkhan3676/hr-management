@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { Button } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/Colors";
 
 const LeaveCategoryBottomSheet = ({
     title,
@@ -128,7 +129,7 @@ const LeaveCategoryBottomSheet = ({
 
                             <Button
                                 mode="contained"
-                                buttonColor="#2563eb"
+                                buttonColor={Colors.light.primaryButton}
                                 textColor="white"
                                 rippleColor="rgba(0, 0, 0, 0.1)"
                                 labelStyle={{ fontSize: 16 }}

@@ -210,7 +210,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     selectedItemText: {
-        // color: "#2563eb",
         fontWeight: "600",
     },
 });

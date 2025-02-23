@@ -5,6 +5,7 @@ import { Button } from "react-native-paper";
 import { router } from "expo-router";
 import LottieView from "lottie-react-native";
 import success from "@/assets/lottie/success.json";
+import { Colors } from "@/constants/Colors";
 
 const SuccessSubmitBottomSheet = ({ showSuccess }) => {
     const bottomSheetRef = useRef(null);
@@ -66,7 +67,7 @@ const SuccessSubmitBottomSheet = ({ showSuccess }) => {
 
                         <Button
                             mode="contained"
-                            buttonColor="#2563eb"
+                            buttonColor={Colors.light.primaryButton}
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             labelStyle={{ fontSize: 16 }}

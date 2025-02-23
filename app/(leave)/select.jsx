@@ -157,17 +157,7 @@ const select = () => {
             </SafeAreaView>
 
             {/* Bottom Buttons - only show when in selection mode */}
-            <View
-                className="absolute bottom-0 flex-row items-start justify-center w-full h-24 gap-4 px-4 bg-white"
-                style={{
-                    shadowColor: "#2563eb",
-                    shadowOffset: { width: 0, height: -2 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 5,
-                    elevation: 10,
-                    zIndex: 1,
-                }}
-            >
+            <View className="absolute bottom-0 flex-row items-start justify-center w-full h-24 gap-4 px-4 bg-white">
                 <Button
                     mode="contained"
                     buttonColor="#FE6B87"

@@ -11,6 +11,7 @@ import {
 } from "@expo/vector-icons";
 import { router } from "expo-router";
 import QRCode from "react-native-qrcode-svg";
+import { Colors } from "@/constants/Colors";
 
 const socialIcons = [
     {
@@ -72,7 +73,7 @@ const profile = () => {
                 <View className="gap-5 py-5 mx-5">
                     <Button
                         mode="contained"
-                        buttonColor="#2563eb"
+                        buttonColor={Colors.light.primaryButton}
                         textColor="white"
                         rippleColor="rgba(0, 0, 0, 0.1)"
                         labelStyle={{ fontSize: 16, padding: 3 }}

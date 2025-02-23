@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
 import SuccessSubmitBottomSheet from "@/components/leave/SuccessSubmitBottomSheet";
+import { Colors } from "@/constants/Colors";
 
 const categories = [
     { id: 1, name: "Causal Leaves (0/1)", type: "Causal" },
@@ -352,7 +353,7 @@ const ApplyLeave = () => {
 
                 <Button
                     mode="contained"
-                    buttonColor="#2563eb"
+                    buttonColor={Colors.light.primaryButton}
                     textColor="white"
                     rippleColor="rgba(0, 0, 0, 0.1)"
                     labelStyle={{
