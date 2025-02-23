@@ -1,4 +1,10 @@
-import { View, Text, StatusBar, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    StatusBar,
+    TouchableOpacity,
+    ScrollView,
+} from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
@@ -6,6 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import ModalRangeDatePicker from "@/components/ModalRangeDatePicker";
 import { Colors } from "@/constants/Colors";
+import PunchLogCard from "../../components/attendance/PunchLogCard";
 
 const punchLogs = () => {
     const [dateRange, setDateRange] = useState({
@@ -30,11 +37,11 @@ const punchLogs = () => {
                 backgroundColor={Colors.light.primaryButton}
                 barStyle={"light-content"}
             />
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 {/* Header Section */}
                 <View
                     style={{ backgroundColor: Colors.light.primaryButton }}
-                    className="bg-[] px-4 py-2 rounded-b-2xl"
+                    className="px-4 py-2 rounded-b-2xl"
                 >
                     <Header
                         title="Punch Logs"
@@ -92,7 +99,18 @@ const punchLogs = () => {
                         )}
                     </View>
                 </View>
-                <Text>punchLogs</Text>
+
+                <ScrollView
+                    contentContainerStyle={{
+                        padding: 16,
+                        gap: 12,
+                    }}
+                    showsVerticalScrollIndicator={false}
+                >
+                    {Array.from({ length: 15 }).map((_, i) => (
+                        <PunchLogCard key={i} />
+                    ))}
+                </ScrollView>
             </SafeAreaView>
 
             {/* Modal Component with State */}
