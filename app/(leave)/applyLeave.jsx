@@ -1,7 +1,6 @@
 import {
     View,
     Text,
-    SafeAreaView,
     Platform,
     ScrollView,
     TouchableOpacity,
@@ -15,6 +14,8 @@ import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
 import SuccessSubmitBottomSheet from "@/components/leave/SuccessSubmitBottomSheet";
 import { Colors } from "@/constants/Colors";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "@/components/Header";
 
 const categories = [
     { id: 1, name: "Causal Leaves (0/1)", type: "Causal" },
@@ -217,9 +218,8 @@ const ApplyLeave = () => {
     );
 
     return (
-        <SafeAreaView
-            style={{ flex: 1, marginTop: Platform.OS === "ios" ? 15 : 5 }}
-        >
+        <SafeAreaView style={{ flex: 1 }}>
+            <Header title="Apply Leave" />
             <ScrollView
                 contentContainerStyle={{
                     marginHorizontal: 16,
