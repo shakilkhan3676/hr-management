@@ -9,7 +9,7 @@ export default function AttendanceLayout() {
                 name="timeTracking"
                 options={{ title: "Time Tracking" }}
             />
-            <Stack.Screen name="Schedule" options={{ title: "Schedule" }} />
+            <Stack.Screen name="schedule" options={{ title: "Schedule" }} />
             <Stack.Screen
                 name="absentList"
                 options={{ title: "Absent List" }}
