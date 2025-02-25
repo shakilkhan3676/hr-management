@@ -15,7 +15,7 @@ import ScheduleIcon from "@/assets/icons/calendar-clock.svg";
 import LeaveIcon from "@/assets/icons/leave.svg";
 import ManualIcon from "@/assets/icons/calendar-exclamation.svg";
 import SliderIcon from "@/assets/icons/settings-sliders.svg";
-import ManualLeaveCard from "@/components/attendance/ManualLeaveCard";
+import ManualAttendanceCard from "@/components/attendance/ManualAttendanceCard";
 import CustomDropdownButton from "@/components/CustomDropdownButton";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -234,9 +234,9 @@ const index = () => {
                             padding: 16,
                         }}
                     >
-                        <ManualLeaveCard />
-                        <ManualLeaveCard />
-                        <ManualLeaveCard />
+                        <ManualAttendanceCard />
+                        <ManualAttendanceCard />
+                        <ManualAttendanceCard />
                     </ScrollView>
                 </View>
             )}

@@ -10,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
 import { Button } from "react-native-paper";
 import { Colors } from "@/constants/Colors";
-import ManualLeaveEntryCard from "@/components/attendance/ManualLeaveEntryCard";
+import ManualAttendanceEntryCard from "@/components/attendance/ManualAttendanceEntryCard";
 
 const manualAttendance = () => {
     const [currentStatus, setCurrentStatus] = useState("All");
@@ -66,7 +66,7 @@ const manualAttendance = () => {
                     showsVerticalScrollIndicator={false}
                 >
                     {Array.from({ length: 15 }).map((_, i) => (
-                        <ManualLeaveEntryCard key={i} />
+                        <ManualAttendanceEntryCard key={i} />
                     ))}
                 </ScrollView>
             </SafeAreaView>

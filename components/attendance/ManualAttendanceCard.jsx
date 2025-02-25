@@ -3,12 +3,12 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 import { Colors } from "@/constants/Colors";
-import ManualLeaveEntryCard from "./ManualLeaveEntryCard";
+import ManualAttendanceEntryCard from "./ManualAttendanceEntryCard";
 
-const ManualLeaveCard = ({ approved = false }) => {
+const ManualAttendanceCard = ({ approved = false }) => {
     return (
         <View className="flex bg-white rounded-2xl">
-            <ManualLeaveEntryCard />
+            <ManualAttendanceEntryCard />
             {approved ? (
                 <View className="flex-row items-center justify-between gap-5 p-4 pt-0">
                     <Button
@@ -90,4 +90,4 @@ const ManualLeaveCard = ({ approved = false }) => {
     );
 };
 
-export default ManualLeaveCard;
+export default ManualAttendanceCard;

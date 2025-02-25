@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const ManualLeaveEntryCard = () => {
+const ManualAttendanceEntryCard = () => {
     return (
         <View className="flex p-4 bg-white rounded-2xl">
             <View className="flex-row items-center justify-between gap-3">
@@ -50,4 +50,4 @@ const ManualLeaveEntryCard = () => {
     );
 };
 
-export default ManualLeaveEntryCard;
+export default ManualAttendanceEntryCard;
