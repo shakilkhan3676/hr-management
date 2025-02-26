@@ -21,12 +21,11 @@ const categories = [
 
 const applyManualAttendance = () => {
     const [formData, setFormData] = useState({
+        location: null,
         date: null,
-        reason: "",
-        category: null,
-        medicalDocument: null,
         inTime: null,
         outTime: null,
+        reason: "",
     });
 
     const [errors, setErrors] = useState({});
@@ -53,18 +52,27 @@ const applyManualAttendance = () => {
     }, []);
 
     const validateForm = () => {
-        const tempErrors = {};
+        let tempErrors = {};
         let isValid = true;
 
-        ["category", "date", "inTime", "outTime", "reason"].forEach((field) => {
-            if (!formData[field]?.trim()) {
-                tempErrors[field] = `Please provide a valid ${field}`;
-                isValid = false;
-            }
-        });
-
-        if (formData.category === "Medical" && !formData.medicalDocument) {
-            tempErrors.medicalDocument = "Medical document is required";
+        if (!formData.location) {
+            tempErrors.location = "Please select your work place";
+            isValid = false;
+        }
+        if (!formData.date) {
+            tempErrors.date = "Start date is required";
+            isValid = false;
+        }
+        if (!formData.inTime) {
+            tempErrors.inTime = "Punch in time is required";
+            isValid = false;
+        }
+        if (!formData.outTime) {
+            tempErrors.outTime = "Punch out time is required";
+            isValid = false;
+        }
+        if (!formData.reason.trim()) {
+            tempErrors.reason = "Please provide a reason for leave";
             isValid = false;
         }
 
@@ -131,13 +139,13 @@ const applyManualAttendance = () => {
                 }}
                 showsVerticalScrollIndicator={false}
             >
-                {/* Leave Category */}
+                {/* Work Place */}
                 <View>
                     <LeaveCategoryBottomSheet
                         dropDownDataList={categories}
-                        title="Leave Category"
+                        title="Work Place"
                         onSelectItem={(item) =>
-                            updateFormData("category", item?.type)
+                            updateFormData("location", item?.type)
                         }
                         isDegree={true}
                         name="name"
@@ -154,7 +162,7 @@ const applyManualAttendance = () => {
                                     Work Location
                                 </Text>
                                 <Text className="text-lg text-gray-600">
-                                    {formData?.category ?? "Select Location"}
+                                    {formData?.location ?? "Select Location"}
                                 </Text>
                                 <FontAwesome
                                     className="absolute top-0 right-0"
@@ -165,9 +173,9 @@ const applyManualAttendance = () => {
                             </View>
                         </TouchableRipple>
                     </LeaveCategoryBottomSheet>
-                    {errors.category && (
+                    {errors.location && (
                         <Text className="ml-2 text-sm text-red-500">
-                            {errors.category}
+                            {errors.location}
                         </Text>
                     )}
                 </View>
@@ -194,18 +202,25 @@ const applyManualAttendance = () => {
                 })}
 
                 {/* Reason */}
-                <TextInput
-                    mode="outlined"
-                    label="Reason"
-                    value={formData.reason}
-                    multiline
-                    outlineColor="#4b5563"
-                    activeOutlineColor="#4b5563"
-                    textColor="#4b5563"
-                    style={{ backgroundColor: "#fff", minHeight: 120 }}
-                    outlineStyle={{ borderRadius: 12 }}
-                    onChangeText={(text) => updateFormData("reason", text)}
-                />
+                <View>
+                    <TextInput
+                        mode="outlined"
+                        label="Reason"
+                        value={formData.reason}
+                        multiline
+                        outlineColor="#4b5563"
+                        activeOutlineColor="#4b5563"
+                        textColor="#4b5563"
+                        style={{ backgroundColor: "#fff", minHeight: 120 }}
+                        outlineStyle={{ borderRadius: 12 }}
+                        onChangeText={(text) => updateFormData("reason", text)}
+                    />
+                    {errors.reason && (
+                        <Text className="ml-2 text-sm text-red-500">
+                            {errors.reason}
+                        </Text>
+                    )}
+                </View>
 
                 {/* Submit Button */}
                 <Button
