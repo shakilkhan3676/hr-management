@@ -11,6 +11,7 @@ import Header from "@/components/Header";
 import { Button } from "react-native-paper";
 import { Colors } from "@/constants/Colors";
 import ManualAttendanceEntryCard from "@/components/attendance/ManualAttendanceEntryCard";
+import { router } from "expo-router";
 
 const manualAttendance = () => {
     const [currentStatus, setCurrentStatus] = useState("All");
@@ -87,7 +88,7 @@ const manualAttendance = () => {
                         // marginTop: 12,
                     }}
                     onPress={() => {
-                        console.log("Approve");
+                        router.push("applyManualAttendance");
                     }}
                 >
                     ADD MANUAL ENTRY

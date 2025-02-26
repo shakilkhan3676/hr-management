@@ -200,7 +200,7 @@ const index = () => {
                                 <Feather
                                     name="search"
                                     size={26}
-                                    color="#09509E"
+                                    color="#1e40af"
                                 />
                             </TouchableRipple>
                         </View>

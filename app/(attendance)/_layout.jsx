@@ -18,6 +18,10 @@ export default function AttendanceLayout() {
                 name="manualAttendance"
                 options={{ title: "Manual Attendance" }}
             />
+            <Stack.Screen
+                name="applyManualAttendance"
+                options={{ title: "Apply Manual Attendance" }}
+            />
         </Stack>
     );
 }

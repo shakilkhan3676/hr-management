@@ -3,6 +3,7 @@ import { View, Modal, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import DateTimePicker from "react-native-ui-datepicker";
 import dayjs from "dayjs";
+import { Colors } from "@/constants/Colors";
 
 const ModalDatePicker = ({
     visible,
@@ -11,7 +12,9 @@ const ModalDatePicker = ({
     initialDate,
     minimumDate,
 }) => {
-    const [selectedDate, setSelectedDate] = useState(initialDate || dayjs());
+    const [selectedDate, setSelectedDate] = useState(
+        initialDate || dayjs().startOf("day").toDate()
+    );
 
     return (
         <Modal
@@ -27,8 +30,13 @@ const ModalDatePicker = ({
                         date={selectedDate}
                         displayFullDays={true}
                         minDate={minimumDate}
-                        onChange={(params) => setSelectedDate(params.date)}
-                        selectedItemColor="#09509E"
+                        onChange={(params) => {
+                            const dateFormat = dayjs(params.date)
+                                .startOf("day")
+                                .toDate();
+                            setSelectedDate(dateFormat);
+                        }}
+                        selectedItemColor={Colors.light.primaryButton}
                         dayContainerStyle={{
                             borderRadius: 10,
                             height: 40,
@@ -38,14 +46,13 @@ const ModalDatePicker = ({
                     <View style={styles.buttonContainer}>
                         <Button
                             mode="contained"
-                            buttonColor="#09509E"
+                            buttonColor={Colors.light.primaryButton}
                             textColor="white"
                             rippleColor="rgba(0, 0, 0, 0.1)"
                             style={styles.button}
                             labelStyle={styles.buttonLabel}
                             onPress={() => {
                                 onSelectDate(selectedDate);
-                                onClose();
                             }}
                         >
                             Select
